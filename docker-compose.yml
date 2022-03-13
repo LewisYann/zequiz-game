@@ -1,0 +1,32 @@
+services:
+  starter-db:
+    image: postgres:11.12
+    container_name: starter-db
+    env_file:
+      - ./server/.env.database
+    ports:
+      - "5432:5432"
+    networks:
+      - starter-net
+    volumes:
+      - ./server/dbdata:/var/lib/postgresql/data
+
+  starter-server:
+    build: ./server
+    container_name: starter-server
+    env_file:
+      - ./server/.env.development
+    expose:
+      - "4000"
+    ports:
+      - "4000:4000"
+    networks:
+      - starter-net
+    depends_on:
+      - starter-db
+    volumes:
+      - ./server:/app
+    command: /bin/sh "./entrypoint.sh"
+
+networks:
+  starter-net:
