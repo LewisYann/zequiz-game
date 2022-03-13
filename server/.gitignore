@@ -1,0 +1,11 @@
+dist
+
+.env.*
+
+node_modules
+
+yarn-error.log
+
+dbdata
+
+watchlog.txt
