@@ -1,16 +1,4 @@
 import "reflect-metadata";
-// setup the project to run locally
-//  - test if the backend code run smoothly - done
-//  - write the mutation to create a user - done
-//  - write the mutation to find user by username - done
-//  - write test for the mutation and the query - done
-// setup docker and get rid of node_modules
-// clean the media board project databases
-// set up test
-// set up docker config for test
-// work on the front side
-// add a mutation to create a user
-// add class validator on traiteurs
 import express from "express";
 import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
