@@ -28,7 +28,9 @@ const main = async () => {
   const app = express();
 
   //set up cors with express cors middleware
-  app.use(cors({ origin: config.frontend_url }));
+  app.use(
+    cors({ origin: [config.frontend_url, config.studio_apollo_graphql_url] })
+  );
 
   const apolloServer = new ApolloServer({
     schema: await createSchema(),
