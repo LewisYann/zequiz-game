@@ -3,6 +3,9 @@ import { Formik, Form } from "formik";
 import { Wrapper } from "../components/Wrapper";
 import { Box, Button } from "@chakra-ui/react";
 import { InputField } from "../components/InputField";
+import { withUrqlClient } from "next-urql";
+import { createUrqlClient } from "../utils/createUrqlClient";
+
 interface IRegisterProps {}
 
 const Register: NextPage<IRegisterProps> = () => {
@@ -44,4 +47,4 @@ const Register: NextPage<IRegisterProps> = () => {
   );
 };
 
-export default Register;
+export default withUrqlClient(createUrqlClient, { ssr: true })(Register);
