@@ -1,0 +1,11 @@
+overwrite: true
+schema: ${NEXT_PUBLIC_BACK_END_URL}
+documents: "src/graphql/**/*.graphql"
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-urql"
+    config:
+      withHooks: true
