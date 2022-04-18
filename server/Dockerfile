@@ -1,12 +1,12 @@
 # dependencies installing stage
-FROM node:14-alpine AS deps
+FROM node:16-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
 # buid stage
-FROM node:14-alpine AS build
+FROM node:16-alpine AS build
 
 WORKDIR /app
 
