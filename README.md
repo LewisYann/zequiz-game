@@ -82,3 +82,35 @@ NEXT_PUBLIC_BACK_END_URL=http://localhost:4000/graphql
 ### web
 
 - go to `http://localhost:3000/register`
+
+## Docs
+
+### overall
+
+- [typescript](https://www.typescriptlang.org/)
+- [graphql](https://graphql.org/)
+- [docker](https://www.docker.com/)
+- [docker-compose](https://docs.docker.com/compose/)
+- [Ben Awad](https://www.youtube.com/watch?v=I6ypD7qv3Z8)
+
+### front
+
+- [Next Js](https://nextjs.org/)
+- [urql](https://formidable.com/open-source/urql/)
+- [graphql-codegen](https://www.graphql-code-generator.com/)
+- [Chakra UI](https://chakra-ui.com/)
+- [Formik](https://formik.org/)
+
+### back
+
+- [express](https://expressjs.com/)
+- [Apollo server](https://www.apollographql.com/docs/apollo-server/)
+- [type-graphql](https://typegraphql.com/)
+- [Typeorm](https://typeorm.io/)
+
+## to do
+
+- create a make file to easy up the starting
+- add mono repo with `turbo repo`
+- add ci steps to manage many environment
+- add storybook
