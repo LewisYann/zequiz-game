@@ -69,7 +69,6 @@ NEXT_PUBLIC_BACK_END_URL=http://localhost:4000/graphql
 ```
 
 - run `yarn`
-- run `yarn build`
 
 ## launch
 
