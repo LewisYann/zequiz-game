@@ -72,7 +72,7 @@ NEXT_PUBLIC_BACK_END_URL=http://localhost:4000/graphql
 
 ## launch
 
-- run `docker-compose up`
+- run `sudo docker-compose up`. The sudo is needed only for the firt launch
 - all your updates are reflected to the container. You can code peacefully
 
 ### server
