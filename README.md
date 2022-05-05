@@ -1,6 +1,24 @@
 # typescript-fullstack-starter
 
-A typescript fullstack starter with all modern tool for coding softly
+A typescript fullstack starter with all modern tools for coding quickly and softly
+
+## Why
+
+### Javascript fatigue
+
+### set up new project faster
+
+### master some key concepts (without switching between to many tools)
+
+## what
+
+## how
+
+### front libraries
+
+### back libraries
+
+### overall strategy
 
 ## requirements
 
@@ -12,6 +30,8 @@ you need the followings tool installed in your environment
 - yarn
 
 ## Set up
+
+:warning: If your are working on windows system, you will need to create your own entrypoint.sh (in server folder) with the command inside the provided, then delete the provided.This is because windows end of line character (and others) are different from linux one.
 
 ### Server
 
@@ -111,6 +131,8 @@ NEXT_PUBLIC_BACK_END_URL=http://localhost:4000/graphql
 ## to do
 
 - create a make file to easy up the starting
+- Add prettier and es-lint config
+- add husky for pre-commit stage
 - add mono repo with `turbo repo`
 - add ci steps to manage many environment
 - add storybook
