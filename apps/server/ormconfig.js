@@ -23,7 +23,7 @@ const config = {
 module.exports = [
   {
     name: "development",
-    type: "postgres",
+    type: "mysql",
     database: config.development.db,
     synchronize: true,
     logging: config.env === "development",
@@ -38,4 +38,21 @@ module.exports = [
     username: config.development.user,
     password: config.development.password,
   },
+  {
+    name: "staging",
+    type: "postgres",
+    database: config.development.db,
+    synchronize: true,
+    logging: config.env === "development",
+    entities: [path.join(__dirname, "/dist/entities/**/*.js")],
+    migrations: [path.join(__dirname, "/dist/migrations/**/*.js")],
+    cli: {
+      entitiesDir: "dist/entities",
+      migrationsDir: "dist/migrations",
+    },
+    host: config.development.host,
+    port: Number(config.development.port),
+    username: config.development.user,
+    password: config.development.password,
+  }
 ];
