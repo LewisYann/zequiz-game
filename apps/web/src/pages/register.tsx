@@ -36,12 +36,12 @@ const Register: NextPage<IRegisterProps> = () => {
             <InputField
               name="username"
               placeholder="username"
-              label="Username"
+              label="Username"            
             />
             <InputField
               name="firstname"
               placeholder="Your firstname"
-              label="Firstname"
+              label="Firstname"        
             />
             <InputField
               name="lastname"

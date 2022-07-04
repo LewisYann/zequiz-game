@@ -11,6 +11,7 @@ type IInputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string;
   placeholder?: string;
   name: string;
+  isRequired?: boolean;
 };
 
 export const InputField: FC<IInputFieldProps> = ({
@@ -27,6 +28,7 @@ export const InputField: FC<IInputFieldProps> = ({
         {...props}
         id={field.name}
         placeholder={props.placeholder}
+        
       />
       {error ? <FormErrorMessage>{error}</FormErrorMessage> : null}
     </FormControl>
