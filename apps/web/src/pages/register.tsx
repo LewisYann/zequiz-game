@@ -8,7 +8,7 @@ import { createUrqlClient } from "../utils/createUrqlClient";
 import { useRegisterMutation } from "../generated/graphql";
 import { useRouter } from "next/router";
 
-interface IRegisterProps {}
+interface IRegisterProps { }
 
 const Register: NextPage<IRegisterProps> = () => {
   const router = useRouter();
@@ -16,7 +16,13 @@ const Register: NextPage<IRegisterProps> = () => {
   return (
     <Wrapper variant="small">
       <Formik
-        initialValues={{ username: "", email: "" }}
+        initialValues={{
+          username: "",
+          email: "",
+          password: "",
+          lastname: "",
+          firstname: ""
+        }}
         onSubmit={async (values) => {
           const response = await register({ input: values });
           const user = response.data?.register;
@@ -32,12 +38,30 @@ const Register: NextPage<IRegisterProps> = () => {
               placeholder="username"
               label="Username"
             />
+            <InputField
+              name="firstname"
+              placeholder="Your firstname"
+              label="Firstname"
+            />
+            <InputField
+              name="lastname"
+              placeholder="Your lastname"
+              label="Lastname"
+            />
             <Box mt={4}>
               <InputField
                 name="email"
                 placeholder="email"
                 label="Email"
                 type="email"
+              />
+            </Box>
+            <Box mt={4}>
+              <InputField
+                name="password"
+                placeholder="Type your secret password"
+                label="Password"
+                type="password"
               />
             </Box>
             <Button
