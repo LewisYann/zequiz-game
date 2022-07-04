@@ -41,12 +41,14 @@ const Register: NextPage<IRegisterProps> = () => {
             <InputField
               name="firstname"
               placeholder="Your firstname"
-              label="Firstname"        
+              label="Firstname"  
+              isRequired={true}      
             />
             <InputField
               name="lastname"
               placeholder="Your lastname"
               label="Lastname"
+              isRequired={true}
             />
             <Box mt={4}>
               <InputField
@@ -62,6 +64,8 @@ const Register: NextPage<IRegisterProps> = () => {
                 placeholder="Type your secret password"
                 label="Password"
                 type="password"
+                isRequired={true}
+
               />
             </Box>
             <Button
