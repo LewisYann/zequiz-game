@@ -15,4 +15,11 @@ export class userResolver {
   ): Promise<User | undefined> {
     return User.findOne({ where: { username } });
   }
+
+  @Query(() => User, { nullable: true })
+  async login(
+    @Arg("username") username: string
+  ): Promise<User | undefined> {
+    return User.findOne({ where: { username } });
+  }
 }
