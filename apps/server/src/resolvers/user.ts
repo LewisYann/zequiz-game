@@ -18,8 +18,15 @@ export class userResolver {
 
   @Query(() => User, { nullable: true })
   async login(
-    @Arg("username") username: string
-  ): Promise<User | undefined> {
-    return User.findOne({ where: { username } });
+    @Arg("username") username: string,
+    @Arg("password") password: string
+  ): Promise<User | undefined | { error: String, status: Number }> {
+    const user = User.findOne({ where: { username, password } });
+
+    if (user===undefined) {
+      return { error: "Invalid username or password", status: 401 };
+    }
+    console.log("users login", user)
+    return user;
   }
 }

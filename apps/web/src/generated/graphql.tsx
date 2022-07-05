@@ -28,6 +28,7 @@ export type MutationRegisterArgs = {
 export type Query = {
   __typename?: 'Query';
   getByUsername?: Maybe<User>;
+  login?: Maybe<User>;
 };
 
 
@@ -35,17 +36,29 @@ export type QueryGetByUsernameArgs = {
   username: Scalars['String'];
 };
 
+
+export type QueryLoginArgs = {
+  password: Scalars['String'];
+  username: Scalars['String'];
+};
+
 export type User = {
   __typename?: 'User';
   createdAt: Scalars['String'];
   email: Scalars['String'];
+  firstname: Scalars['String'];
   id: Scalars['Int'];
+  lastname: Scalars['String'];
+  password: Scalars['String'];
   updatedAt: Scalars['String'];
   username: Scalars['String'];
 };
 
 export type UserInput = {
   email: Scalars['String'];
+  firstname: Scalars['String'];
+  lastname: Scalars['String'];
+  password: Scalars['String'];
   username: Scalars['String'];
 };
 
@@ -62,6 +75,14 @@ export type GetByUsernameQueryVariables = Exact<{
 
 
 export type GetByUsernameQuery = { __typename?: 'Query', getByUsername?: { __typename?: 'User', id: number, username: string, email: string, createdAt: string, updatedAt: string } | null };
+
+export type LoginQueryVariables = Exact<{
+  password: Scalars['String'];
+  username: Scalars['String'];
+}>;
+
+
+export type LoginQuery = { __typename?: 'Query', login?: { __typename?: 'User', username: string, firstname: string, lastname: string, email: string, createdAt: string, updatedAt: string } | null };
 
 
 export const RegisterDocument = gql`
@@ -92,4 +113,20 @@ export const GetByUsernameDocument = gql`
 
 export function useGetByUsernameQuery(options: Omit<Urql.UseQueryArgs<GetByUsernameQueryVariables>, 'query'>) {
   return Urql.useQuery<GetByUsernameQuery>({ query: GetByUsernameDocument, ...options });
+};
+export const LoginDocument = gql`
+    query Login($password: String!, $username: String!) {
+  login(password: $password, username: $username) {
+    username
+    firstname
+    lastname
+    email
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+export function useLoginQuery(options: Omit<Urql.UseQueryArgs<LoginQueryVariables>, 'query'>) {
+  return Urql.useQuery<LoginQuery>({ query: LoginDocument, ...options });
 };
