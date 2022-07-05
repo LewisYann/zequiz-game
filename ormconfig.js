@@ -27,10 +27,10 @@ module.exports = [
     database: config.development.db,
     synchronize: true,
     logging: config.env === "development",
-    entities: [path.join(__dirname, "/dist/entities/**/*.js")],
-    migrations: [path.join(__dirname, "/dist/migrations/**/*.js")],
+    entities: [path.join(__dirname, "/apps/server/src/entities/*.ts")],
+    migrations: [path.join(__dirname, "/dist/migrations/**/*.ts")],
     cli: {
-      entitiesDir: "dist/entities",
+      entitiesDir: "apps/server/src/entities/*.ts",
       migrationsDir: "dist/migrations",
     },
     host: config.development.host,
