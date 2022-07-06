@@ -5,8 +5,9 @@ import { useGetByUsernameQuery } from "../../generated/graphql";
 import { createUrqlClient } from "../../utils/createUrqlClient";
 import { Flex } from "@chakra-ui/react";
 
-const User: NextPage = () => {
+const User: NextPage = (props) => {
   const router = useRouter();
+  console.log('props', props)
   const username = router.query.username as string;
   const [{ data, error, fetching }] = useGetByUsernameQuery({
     variables: { username },
