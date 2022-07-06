@@ -8,6 +8,7 @@ import { Wrapper } from "../components/Wrapper";
 import { InputField } from "../components/InputField";
 import { createUrqlClient } from "../utils/createUrqlClient";
 import { useLoginMutation } from "../generated/graphql";
+import toast, { Toaster } from "react-hot-toast";
 
 interface IRegisterProps { }
 
@@ -18,23 +19,31 @@ const Login: NextPage<IRegisterProps> = () => {
   return (
     <Wrapper variant="small">
       <Formik
-        initialValues={{ username: "", email: "", password: "" }}
+        initialValues={{ username: "", password: "" }}
         onSubmit={async (values) => {
-          const response = await login({ values });
+          const response = await login(values);
+          console.log(values)
           const user = response.data?.login;
-          console.log('response', response)
           if (user) {
-            router.push(`user/${user.username}`);
+            toast.success('Successfully, redirecting...')
+            router.push(`user/${user.firstname}/${user.lastname}`);
+          }
+          else {
+            toast.error("Something went wrong, please your credential")
           }
         }}
       >
         {({ isSubmitting }) => (
           <Form>
+            <Toaster
+              position="top-center"
+              reverseOrder={false}
+            />
             <Box mt={4}>
               <InputField
                 name="username"
                 placeholder="Entrer your username"
-                label="Email"
+                label="Username"
               />
             </Box>
             <Box mt={4}>

@@ -16,10 +16,10 @@ export class userResolver {
     return User.findOne({ where: { username } });
   }
 
-  @Mutation(() => User,{ nullable: true })
+  @Mutation(() => User, { nullable: true })
   async login(
-    @Arg("username") username: string,
-    @Arg("password") password: string
+    @Arg("username") username: String,
+    @Arg("password") password: String
   ): Promise<User | undefined | { error: String, status: Number }> {
     const user = User.findOne({ where: { username, password } });
 
