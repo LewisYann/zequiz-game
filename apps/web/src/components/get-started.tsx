@@ -1,13 +1,7 @@
-import { NextPage } from "next";
-import { withUrqlClient } from "next-urql";
-import { CountdownCircleTimer } from 'react-countdown-circle-timer';
-import { createUrqlClient } from "../../utils/createUrqlClient";
-import { Flex, UnorderedList, ListItem, Box, Grid, Button, Center, } from "@chakra-ui/react";
-import { useRouter } from "next/router";
+import { UnorderedList, ListItem, Box, Grid, Button, Center, } from "@chakra-ui/react";
 
-const GetStarted: NextPage = () => {
-    const router=useRouter()
-    
+const GetStarted = () => {
+
     return (
         <Grid
             alignItems="center"
@@ -43,4 +37,4 @@ const GetStarted: NextPage = () => {
 
 };
 
-export default withUrqlClient(createUrqlClient, { ssr: true })(GetStarted);
+export default GetStarted;

@@ -1,4 +1,4 @@
-import { Box, Image, Badge } from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 
 
 function ActorCard() {
@@ -18,7 +18,7 @@ function ActorCard() {
             <Image src={property.imageUrl} alt={property.imageAlt} />
 
             <Box p='6'>
-                 
+
                 <Box
                     mt='1'
                     fontWeight='semibold'
