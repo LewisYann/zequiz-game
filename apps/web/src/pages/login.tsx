@@ -26,7 +26,7 @@ const Login: NextPage<IRegisterProps> = () => {
           const user = response.data?.login;
           if (user) {
             toast.success('Successfully, redirecting...')
-            router.push(`user/${user.username}`);
+            router.push(`admin/get-started`);
           }
           else {
             toast.error("Something went wrong, please check your credential")
