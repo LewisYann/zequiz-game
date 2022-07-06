@@ -53,6 +53,80 @@ describe("user resolvers", () => {
     expect(mockCreate).toHaveBeenCalledTimes(1);
     expect(mockSave).toHaveBeenCalledTimes(1);
   });
+ /* it("should login user", async () => {
+    const data = users[1];
+    const mockFindOne = jest.fn().mockResolvedValue(data as User);
+    BaseEntity.findOne = mockFindOne;
+
+    const mutation = `
+    mutation Login($password: String!, $username: String!) {
+      login(username: $username,password: $password) {
+        username
+        firstname
+        lastname
+        email
+        createdAt
+        updatedAt
+      }
+    }
+    `;
+    const variables = {
+      username: data.username,
+      password: data.password,
+    };
+
+    const response = await graphQLRequest({
+      source: mutation,
+      variableValues: variables,
+    });
+
+    const expected = {
+      data: {
+        login: variables
+      },
+    };
+    console.log(response?.data?.login);
+    expect(response?.data?.login?.username).toBe(expected.data.login.username);
+    expect(mockFindOne).toHaveBeenCalledTimes(1);
+    expect(mockFindOne).toHaveBeenCalledWith({
+      where: { username: data.username, password: data.password }
+    });
+  });*/
+  it("should return error if user not found", async () => {
+    const data = users[1];
+    const mockFindOne = jest.fn().mockResolvedValue(data as User);
+    BaseEntity.findOne = mockFindOne;
+
+
+    const mutation = `
+    mutation Login($password: String!, $username: String!) {
+      login(username: $username,password: $password) {
+        username
+        firstname
+        lastname
+        email
+        createdAt
+        updatedAt
+      }
+    }
+    `;
+    const variables = {
+      username: data.username,
+      password: data.password,
+    };
+
+    const response = await graphQLRequest({
+      source: mutation,
+      variableValues: variables,
+    });
+
+    expect(response?.data?.login).toBeNull();
+    expect(mockFindOne).toHaveBeenCalledTimes(1);
+    expect(mockFindOne).toHaveBeenCalledWith({
+      where: { username: data.username, password: data.password }
+    });
+  });
+
 
   it("should find the user by it's username", async () => {
     const data = users[0];

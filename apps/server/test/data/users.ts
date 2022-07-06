@@ -6,4 +6,11 @@ export default [
     firstname: "Hugo",
     password: "hugo",
   },
+  {
+    username: "admin",
+    email: "admi@starter.com",
+    lastname: "hugo",
+    firstname: "Hugo",
+    password: "test",
+  },
 ];
