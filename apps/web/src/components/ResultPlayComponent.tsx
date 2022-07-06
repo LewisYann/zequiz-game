@@ -1,8 +1,7 @@
 import { UnorderedList, ListItem, Box, Grid, Button, Center, } from "@chakra-ui/react";
 import { StepType } from "../types/GameStep";
 
-function GetStarted({ setStep }) {
-
+const ResultPlayComponent = ({ setStep }) => {
 
     return (
         <Grid
@@ -13,23 +12,21 @@ function GetStarted({ setStep }) {
             fontSize="2xl"
         >
             <Box>
-                <h1>Game Rules</h1>
-                <UnorderedList>
-                    <ListItem>Lorem ipsum dolor sit amet</ListItem>
-                    <ListItem>Consectetur adipiscing elit</ListItem>
-                    <ListItem>Integer molestie lorem at massa</ListItem>
-                    <ListItem>Facilisis in pretium nisl aliquet</ListItem>
-                </UnorderedList>
+                <div style={{ textAlign: "center" }}>
+                    <h1> Oops ! Game Over </h1> <br />
+                    <h1> Score: 80</h1> <br />
+                    <h3>Vous avez repondu a 5 question sur 20</h3>
+                </div>
                 <Center>
                     <Button
                         type="submit"
                         mt={4}
                         //isLoading={isSubmitting}
                         colorScheme="blue"
-                        onClick={() => setStep(StepType.Playing)}
+                        onClick={() => setStep(StepType.Started)}
                         style={{ justifyContent: "center", alignItems: "center", alignSelf: "center" }}
                     >
-                        Play game
+                        Replay
                     </Button>
                 </Center>
             </Box>
@@ -38,4 +35,4 @@ function GetStarted({ setStep }) {
 
 };
 
-export default GetStarted;
+export default ResultPlayComponent;

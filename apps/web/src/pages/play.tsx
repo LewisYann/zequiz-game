@@ -3,32 +3,24 @@ import { withUrqlClient } from "next-urql";
 import { createUrqlClient } from "../utils/createUrqlClient";
 import { Button, Center } from "@chakra-ui/react";
 import { Container, Row, Col } from "react-bootstrap";
-
+import ResultPlayComponent from "../components/ResultPlayComponent";
 import GetStarted from "../components/GetStarted"
 import PlayingComponent from "../components/PlayingComponent";
-
 import { useState } from "react";
+import { StepType } from "../types/GameStep";
 
-enum StepType {
-    Started = "Started",
-    Playing = "Playing",
-    Success = "Success",
-    Failed = "Failed"
-}
 
 const Play: NextPage = () => {
-    const [step, setStep] = useState(StepType.Started)
+    const [step, setStep] = useState(StepType.Started);
 
     if (step == StepType.Started)
-        return <GetStarted />
+        return <GetStarted setStep={setStep} />
     else if (step == StepType.Playing)
-        return <PlayingComponent />
-    else if (step == StepType.Success)
-        return <GetStarted />
-    else if (step == StepType.Failed)
-        return <GetStarted />
+        return <PlayingComponent setStep={setStep} />
+    else if (step == StepType.Success || step == StepType.Failed)
+        return <ResultPlayComponent setStep={setStep} />
 
-
+    return <></>
 
 };
 

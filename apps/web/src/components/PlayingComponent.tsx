@@ -4,9 +4,9 @@ import { Container, Row, Col } from "react-bootstrap";
 import ActorCard from "../components/ActorCard";
 import MovieCard from "../components/MovieCard";
 import QuizCard from "../components/QuizCard";
+import { StepType } from "../types/GameStep";
 
-
-export default function PlayingComponent() {
+export default function PlayingComponent({ setStep }) {
 
     return (
         <Container style={{ paddingTop: 30 }} >
@@ -53,8 +53,8 @@ export default function PlayingComponent() {
                         style={{ justifyContent: "space-between", marginRight: 30 }}
                         //isLoading={isSubmitting}
                         colorScheme="red"
-                    // onClick={() => router.push(`/admin/play`)}
-                    >
+                        onClick={() => setStep(StepType.Failed)}>
+
                         Non
 
                     </Button>
