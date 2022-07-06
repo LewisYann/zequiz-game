@@ -87,7 +87,7 @@ export type GetByUsernameQuery = { __typename?: 'Query', getByUsername?: { __typ
 
 export const LoginDocument = gql`
     mutation Login($password: String!, $username: String!) {
-  login(password: $password, username: $username) {
+  login(username: $username, password: $password) {
     username
     firstname
     lastname
