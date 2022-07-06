@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 
 const GetStarted: NextPage = () => {
     const router=useRouter()
+    
     return (
         <Grid
             alignItems="center"
