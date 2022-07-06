@@ -24,7 +24,7 @@ const GetStarted = () => {
                         mt={4}
                         //isLoading={isSubmitting}
                         colorScheme="blue"
-                        onClick={() => router.push(`/admin/play`)}
+                        onClick={() => {}}
                         style={{ justifyContent: "center", alignItems: "center", alignSelf: "center" }}
                     >
                         Play game
