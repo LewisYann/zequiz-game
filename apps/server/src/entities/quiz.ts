@@ -17,7 +17,7 @@ export class Quiz extends BaseEntity {
   id!: number;
 
   @Field(() => Round)
-  @ManyToOne(() => Round, (round) => round.quizzes)
+  @ManyToOne(() => Round, (round) => round.quiz)
   round!: Round;
 
   @Field(() => Boolean)
@@ -50,7 +50,7 @@ export class Quiz extends BaseEntity {
 
   @Field(() => String)
   @Column()
-  movieUrl: Date;
+  movieUrl: string;
 
   @Field(() => String)
   @CreateDateColumn()

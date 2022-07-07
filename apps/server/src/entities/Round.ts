@@ -1,4 +1,4 @@
-import { ObjectType, Field, Int } from "type-graphql";
+import { ObjectType, Field } from "type-graphql";
 import {
   BaseEntity,
   PrimaryGeneratedColumn,
@@ -13,13 +13,13 @@ import { Quiz } from ".";
 @ObjectType()
 @Entity()
 export class Round extends BaseEntity {
-  @Field(() => Int)
-  @PrimaryGeneratedColumn()
-  id!: number;
-
-  @Field(() => Quiz)
-  @OneToMany(() => Quiz, (quiz) =>quiz.round)
-  quizzes!: Quiz[];
+  @Field(() => String)
+  @PrimaryGeneratedColumn("uuid")
+  publicId!: string;
+  
+  @Field(() => [Quiz])
+  @OneToMany(() => Quiz, (quiz) => quiz.round)
+  quiz!: Quiz[];
 
   @Field(() => Number)
   @Column()
