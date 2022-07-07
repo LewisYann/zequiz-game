@@ -25,8 +25,8 @@ module.exports = [
     database: config.development.db,
     synchronize: true,
     logging: config.env === "development",
-    entities: ["apps/server/src/entities/*.ts"],
-    migrations: ["apps/server/dist/*.ts"],
+    entities: [path.join(__dirname, "/src/entities/*.ts")],
+    migrations: [path.join(__dirname, "/dist/migrations/*.ts")],
     cli: {
       entitiesDir: "apps/server/src/entities",
       migrationsDir: "apps/server/.dist",
