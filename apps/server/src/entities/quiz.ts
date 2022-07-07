@@ -8,7 +8,7 @@ import {
   UpdateDateColumn,
   ManyToOne
 } from "typeorm";
-import { Round } from "./Round";
+import { Round } from ".";
 @ObjectType()
 @Entity()
 export class Quiz extends BaseEntity {

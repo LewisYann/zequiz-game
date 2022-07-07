@@ -8,7 +8,7 @@ import {
   UpdateDateColumn,
   OneToMany
 } from "typeorm";
-import { Quiz } from "./quiz";
+import { Quiz } from ".";
 
 @ObjectType()
 @Entity()
