@@ -6,14 +6,19 @@ import {
   Entity,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne
 } from "typeorm";
-
+import { Round } from "./Round";
 @ObjectType()
 @Entity()
 export class Quiz extends BaseEntity {
   @Field(() => Int)
   @PrimaryGeneratedColumn()
   id!: number;
+
+  @Field(() => Round)
+  @ManyToOne(() => Round, (round) => round.quizzes)
+  round!: Round;
 
   @Field(() => Boolean)
   @Column()
