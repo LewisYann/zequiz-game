@@ -10,7 +10,7 @@ import {
 
 @ObjectType()
 @Entity()
-export class Quiz extends BaseEntity {
+export class User extends BaseEntity {
   @Field(() => Int)
   @PrimaryGeneratedColumn()
   id!: number;
@@ -44,7 +44,7 @@ export class Quiz extends BaseEntity {
   releaseDate!: string;
 
   @Field(() => String)
-  @Column()
+  @CreateDateColumn()
   movieUrl: Date;
 
   @Field(() => String)
