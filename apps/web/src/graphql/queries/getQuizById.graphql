@@ -1,8 +1,18 @@
-query GetByUsername($username: String!) {
-  getByUsername(username: $username) {
+query GetQuizById($getQuizByIdId: String!) {
+  getQuizById(id: $getQuizByIdId) {
     id
-    username
-    email
+    round {
+      publicId
+    }
+    adult
+    actorName
+    originalName
+    actorPicture
+    movieTitle
+    movieDescription
+    releaseDate
+    movieUrl
+    quizType
     createdAt
     updatedAt
   }
