@@ -1,4 +1,4 @@
-mutation CreateQuiz($roundType: String!) {
+mutation CreateRound($roundType: String!) {
   createRound(roundType: $roundType) {
     publicId
     score
