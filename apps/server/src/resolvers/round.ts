@@ -1,12 +1,14 @@
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
-import { Round, Quiz } from "../entities";
+import { Round } from "../entities";
 
 
 @Resolver()
 export class roundResolver {
     @Mutation(() => Round)
-    async createRound(): Promise<Round | Round[] | Quiz[] | undefined> {
-        const round = await Round.create({ score: 0 }).save();
+    async createRound(
+        @Arg("roundType") roundType: string,
+    ): Promise<Round | undefined> {
+        const round = await Round.create({ score: 0, roundType: roundType }).save();
         //let quizzes = await getMoviesPopular(round.publicId)
         //console.log("xsd", quizzes)
         //Quiz.save(quizzes)
