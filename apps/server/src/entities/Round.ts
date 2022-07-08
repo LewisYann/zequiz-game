@@ -26,6 +26,10 @@ export class Round extends BaseEntity {
   score!: number;
 
   @Field(() => String)
+  @Column()
+  roundType!: String;
+
+  @Field(() => String)
   @CreateDateColumn()
   createdAt: Date;
 

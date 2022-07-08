@@ -14,11 +14,11 @@ import { Round } from ".";
 export class Quiz extends BaseEntity {
   @Field(() => Int)
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Field(() => Round)
   @ManyToOne(() => Round, (round) => round.quiz)
-  round!: Round;
+  round?: Round;
 
   @Field(() => Boolean)
   @Column()
@@ -51,6 +51,10 @@ export class Quiz extends BaseEntity {
   @Field(() => String)
   @Column()
   movieUrl: string;
+
+  @Field(() => Boolean)
+  @Column()
+  quizType: boolean;
 
   @Field(() => String)
   @CreateDateColumn()

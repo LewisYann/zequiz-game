@@ -15,7 +15,7 @@ export const openDBConnection = async (drop = true): Promise<Connection> => {
     namingStrategy: new SnakeNamingStrategy(),
     name: "default",
     synchronize: drop,
-    dropSchema: false,
+    dropSchema: true,
     entities: [
       path.join(__dirname, "..", "/entities/*.ts")
     ],
