@@ -1,0 +1,22 @@
+mutation CreateQuiz($publicId: String!) {
+  createQuiz(publicId: $publicId) {
+    id
+    round {
+      publicId
+      updatedAt
+      score
+      roundType
+    }
+    adult
+    actorName
+    originalName
+    actorPicture
+    movieTitle
+    movieDescription
+    releaseDate
+    movieUrl
+    quizType
+    createdAt
+    updatedAt
+  }
+}

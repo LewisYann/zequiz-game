@@ -50,7 +50,7 @@ export class quizResolver {
     @Mutation(() => Quiz, { nullable: true })
     async createQuiz(
         @Arg("publicId") publicId: string,
-        
+
     ): Promise<Quiz | undefined> {
         // const quiz = await getQuiz(publicId)
         const response = await axios.get("https://api.themoviedb.org/3/movie/popular?api_key=f797a48d40f189b038093795534b113b")
@@ -139,7 +139,7 @@ export class quizResolver {
         return Quiz.findOne(id);
     }
 
-    @Mutation(() => Quiz)
+    @Mutation(() => Boolean)
     async checkQuiz(
         @Arg("id") id: number,
         @Arg("publicId") publicId: string,
