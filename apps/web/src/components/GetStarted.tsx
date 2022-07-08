@@ -1,7 +1,7 @@
-import { UnorderedList, ListItem, Box, Grid, Button, Center, } from "@chakra-ui/react";
+import { UnorderedList, ListItem, Box, Grid, Button, Center, Select } from "@chakra-ui/react";
 import { StepType } from "../types/GameStep";
 
-function GetStarted({ setStep }) {
+function GetStarted({ setStep, setLevel }) {
 
 
     return (
@@ -14,6 +14,14 @@ function GetStarted({ setStep }) {
         >
             <Box>
                 <h1>Game Rules</h1>
+
+                <Select onChange={(e) => setLevel(e.target.value)} >
+                    <option>Select game level</option>
+                    <option value="20">20</option>
+                    <option value="40">40</option>
+                    <option value="60">60</option>
+                    <option value="unlimited">Illimité</option>
+                </Select>
                 <UnorderedList>
                     <ListItem>Lorem ipsum dolor sit amet</ListItem>
                     <ListItem>Consectetur adipiscing elit</ListItem>

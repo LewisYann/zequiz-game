@@ -12,9 +12,10 @@ import { StepType } from "../types/GameStep";
 
 const Play: NextPage = () => {
     const [step, setStep] = useState(StepType.Started);
+    const [level, setLevel] = useState("20");
 
     if (step == StepType.Started)
-        return <GetStarted setStep={setStep} />
+        return <GetStarted setStep={setStep} setLevel={setLevel} />
     else if (step == StepType.Playing)
         return <PlayingComponent setStep={setStep} />
     else if (step == StepType.Success || step == StepType.Failed)
