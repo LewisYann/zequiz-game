@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 
 
-const renderTime = ({ remainingTime }) => {
+const renderTime = ({ remainingTime }: { remainingTime: number }) => {
     const currentTime = useRef(remainingTime);
-    const prevTime = useRef(null);
+    const prevTime = useRef(0);
     const isNewTimeFirstTick = useRef(false);
     const [, setOneLastRerender] = useState(0);
 

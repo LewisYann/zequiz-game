@@ -16,7 +16,6 @@ const Play: NextPage = () => {
     const [level, setLevel] = useState("20");
     const [round, createRound] = useCreateRoundMutation()
     const [numberQuiz, setNumberQuiz] = useState(0)
-
     if (step == StepType.Started)
         return <GetStarted level={level} setStep={setStep} isLoading={round.fetching} setLevel={setLevel} onStarted={createRound} />
     else if (step == StepType.Playing)

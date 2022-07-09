@@ -11,7 +11,10 @@ async function getMoviesDetails(movieId: number, roundType: any, type?: boolean)
     } while (!response.data)
 
 
-    const data: any = response?.data
+    let data: any = response?.data
+    data.cast = data.cast.filter((cast: any) => cast.profile_path != null)
+    data.crew = data.crew.filter((crew: any) => crew.profile_path != null)
+
     console.log('data', response)
     if (roundType === "unlimited" || typeof type == "undefined") {
         if (Math.floor(Math.random() * data?.cast?.length - 1) > data?.cast?.length / 2) {
@@ -53,7 +56,7 @@ export class quizResolver {
 
     ): Promise<Quiz | undefined> {
         // const quiz = await getQuiz(publicId)
-        const response = await axios.get("https://api.themoviedb.org/3/movie/popular?api_key=f797a48d40f189b038093795534b113b")
+        const response = await axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=f797a48d40f189b038093795534b113b")
         const data: any[] = response?.data?.results
         let movie = response.data.results[Math.floor(Math.random() * data.length - 1) || 1]
         const round = await Round.findOne({ where: { publicId } })
@@ -149,7 +152,7 @@ export class quizResolver {
         const quiz = await Quiz.findAndCount({ where: { id: id, quizType: response } })
 
         if (quiz[1] > 0) {
-            await Round.update(publicId, { score: score })
+            await Round.update(publicId, { score: score+10 })
             return true
         }
         return false

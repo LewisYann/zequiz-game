@@ -9,31 +9,40 @@ import { useCheckQuizMutation, useCreateQuizMutation } from '../generated/graphq
 import { useEffect } from 'react';
 import toast, { Toaster } from "react-hot-toast";
 import renderTime from './countDown';
+import { Round } from "../generated/graphql"
 
-export default function PlayingComponent({ setStep, round, setNumberQuiz, numberQuiz }) {
+type PlayingType = {
+    setStep: (event: any) => void;
+    setNumberQuiz: (event: any) => void;
+    round: { createRound: Round };
+    numberQuiz: number;
+}
+export default function PlayingComponent({ setStep, round, setNumberQuiz, numberQuiz }: PlayingType) {
 
     const [quiz, createQuiz] = useCreateQuizMutation()
     const [check, checkQuiz] = useCheckQuizMutation()
 
     useEffect(() => {
-        if (round.data.createRound)
-            createQuiz({ publicId: round.data.createRound.publicId })
+        if (round.createRound)
+            createQuiz({ publicId: round.createRound.publicId })
     }, [])
 
     function handleCheckResponse(response: boolean) {
-        checkQuiz({ score: numberQuiz * 10, response: response, checkQuizId: quiz.data?.createQuiz?.id, publicId: round.data.createRound.publicId })
-            .then(
-                (data) => {
-                    if (data.data?.checkQuiz == true) {
-                        toast.success('Bravooo !')
-                        setNumberQuiz((p: number) => p + 1)
-                        createQuiz({ publicId: round.data.createRound.publicId })
-                    } else if (data.data?.checkQuiz == false) {
-                        toast.error('Oopss!')
-                        setStep(StepType.Failed)
+        if (quiz.data?.createQuiz?.id) {
+            checkQuiz({ score: numberQuiz * 10, response: response, checkQuizId: quiz.data.createQuiz.id, publicId: round.createRound.publicId })
+                .then(
+                    (data) => {
+                        if (data.data?.checkQuiz == true) {
+                            toast.success('Bravooo !')
+                            setNumberQuiz((p: number) => p + 1)
+                            createQuiz({ publicId: round.createRound.publicId })
+                        } else if (data.data?.checkQuiz == false) {
+                            toast.error('Oopss!')
+                            setStep(StepType.Failed)
+                        }
                     }
-                }
-            )
+                )
+        }
 
     }
     if (quiz.fetching) {
@@ -77,7 +86,7 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
                         type="submit"
                         mt={4}
                         colorScheme="blue"
-                        onClick={() => createQuiz({ publicId: round.data.createRound.publicId })}
+                        onClick={() => createQuiz({ publicId: round.createRound.publicId })}
                         style={{ justifyContent: "center", alignItems: "center", alignSelf: "center" }}
                     >
                         Try again
@@ -117,19 +126,19 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
                 <Col>
                     <p>Score: {numberQuiz * 10}</p>
                     <p>Quizzes Answered:{numberQuiz}</p>
-                    <p>Quizzes Left : {round.data.createRound.roundType}</p>
+                    <p>Quizzes Left : {round?.createRound?.roundType}</p>
                 </Col>
             </Row>
             <Row >
                 <Col md={6}>
                     <Center>
-                        <ActorCard quiz={quiz} />
+                        <ActorCard quiz={quiz.data} />
                     </Center>
 
                 </Col>
                 <Col md={6}>
                     <Center>
-                        <MovieCard quiz={quiz} />
+                        <MovieCard quiz={quiz.data} />
                     </Center>
 
                 </Col>
@@ -138,7 +147,7 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
             <br />
             <Row>
                 <Center>
-                    <QuizCard quiz={quiz} />
+                    <QuizCard quiz={quiz.data} />
                 </Center>
 
             </Row>
