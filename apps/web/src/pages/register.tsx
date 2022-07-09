@@ -7,6 +7,7 @@ import { withUrqlClient } from "next-urql";
 import { createUrqlClient } from "../utils/createUrqlClient";
 import { useRegisterMutation } from "../generated/graphql";
 import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
 interface IRegisterProps { }
 
@@ -24,10 +25,18 @@ const Register: NextPage<IRegisterProps> = () => {
           firstname: ""
         }}
         onSubmit={async (values) => {
-          const response = await register({ input: values });
-          const user = response.data?.register;
-          if (user) {
-            router.push(`user/${user.username}`);
+          try {
+            const response = await register({ input: values });
+            const user = response.data?.register;
+            if (user && response.error) {
+              toast.success('Successfully, redirecting...')
+              router.push(`user/${user.username}`);
+            }
+            else {
+              toast.error("Please, complete all field and try again")
+            }
+          } catch {
+            toast.error("Something went wrong, please try again")
           }
         }}
       >

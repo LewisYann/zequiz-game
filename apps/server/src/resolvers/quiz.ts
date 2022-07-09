@@ -6,14 +6,13 @@ import axios from "axios";
 
 async function getMoviesDetails(movieId: number, roundType: any, type?: boolean) {
     let response = null
-    setTimeout(() => console.log('count'), 3000)
     response = await axios.get(`${process.env.MOVIE_URL}/3/movie/${movieId.toString()}/credits?api_key=${process.env.API_KEY}`)
+    setTimeout(() => console.log('count'), 3000)
     let data: any = response?.data
    
     data.cast = data.cast.filter((cast: any) => cast.profile_path != null)
     data.crew = data.crew.filter((crew: any) => crew.profile_path != null)
 
-    console.log('data', response)
     if (roundType === "unlimited" || typeof type == "undefined") {
         if (Math.floor(Math.random() * data?.cast?.length - 1) > data?.cast?.length / 2) {
             const tmp = Math.floor(Math.random() * data.cast.length - 1)
