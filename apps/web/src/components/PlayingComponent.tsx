@@ -1,5 +1,5 @@
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
-import { Button, Center, Spinner, Flex } from "@chakra-ui/react";
+import { Button, Center, Spinner, Flex, Grid } from "@chakra-ui/react";
 import { Container, Row, Col } from "react-bootstrap";
 import ActorCard from "../components/ActorCard";
 import MovieCard from "../components/MovieCard";
@@ -60,6 +60,33 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
 
         )
     }
+
+    if (quiz.error) {
+        return (
+
+            <Grid
+                alignItems="center"
+                h="100vh"
+                justifyContent="center"
+                fontWeight="bold"
+                fontSize="5xl"
+            >
+                An error has occurred, plean try again
+                <Center>
+                    <Button
+                        type="submit"
+                        mt={4}
+                        colorScheme="blue"
+                        onClick={() => createQuiz({ publicId: round.data.createRound.publicId })}
+                        style={{ justifyContent: "center", alignItems: "center", alignSelf: "center" }}
+                    >
+                        Try again
+                    </Button>
+                </Center>
+            </Grid>
+
+        )
+    }
     return (
         <Container style={{ paddingTop: 30 }} >
             <Toaster
@@ -74,7 +101,7 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
                         <CountdownCircleTimer
                             size={150}
                             isPlaying
-                            duration={60*3}
+                            duration={60 * 3}
                             colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                             colorsTime={[7, 5, 2, 0]}
                             onComplete={() => {
