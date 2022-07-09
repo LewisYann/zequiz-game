@@ -5,8 +5,8 @@ function ActorCard({ quiz }) {
     console.log("quiz", quiz)
 
     return (
-        <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-            <Image src={quiz?.data?.createQuiz?.actorPicture} alt={quiz?.data?.createQuiz?.originalName} />
+        <Box maxW='xs' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+            <Image  src={quiz?.data?.createQuiz?.actorPicture} alt={quiz?.data?.createQuiz?.originalName} />
 
             <Box p='6'>
 

@@ -45,6 +45,10 @@ export default function PlayingComponent({ setStep, round }) {
                 fontWeight="bold"
                 fontSize="5xl"
             >
+                <Toaster
+                    position="top-center"
+                    reverseOrder={false}
+                />
                 <div>
                     <Spinner />
                 </div>
@@ -66,9 +70,14 @@ export default function PlayingComponent({ setStep, round }) {
                     <CountdownCircleTimer
                         size={150}
                         isPlaying
-                        duration={60 * 2}
+                        duration={60}
                         colors={['#004777', '#F7B801', '#A30000', '#A30000']}
-                        colorsTime={[7, 5, 2, 0]}>
+                        colorsTime={[7, 5, 2, 0]}
+                        onComplete={() => {
+                            toast('Time out')
+                            setStep(StepType.Failed)
+                        }}
+                    >
 
                         {({ remainingTime }) => remainingTime}
                     </CountdownCircleTimer>
