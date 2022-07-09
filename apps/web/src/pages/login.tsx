@@ -15,7 +15,7 @@ interface IRegisterProps { }
 const Login: NextPage<IRegisterProps> = () => {
   const router = useRouter();
   const [, login] = useLoginMutation();
-  
+
   return (
     <Wrapper variant="small">
       <Formik
@@ -23,13 +23,17 @@ const Login: NextPage<IRegisterProps> = () => {
         onSubmit={async (values) => {
           const response = await login(values);
           console.log(values)
-          const user = response.data?.login;
-          if (user) {
-            toast.success('Successfully, redirecting...')
-            router.push(`admin/get-started`);
-          }
-          else {
-            toast.error("Something went wrong, please check your credential")
+          try {
+            const user = response.data?.login;
+            if (user) {
+              toast.success('Successfully, redirecting...')
+              router.push(`user/${user.username}`);
+            }
+            else {
+              toast.error("Please check your credential")
+            }
+          } catch {
+            toast.error("Something went wrong, please try again")
           }
         }}
       >

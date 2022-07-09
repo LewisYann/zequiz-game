@@ -1,4 +1,4 @@
-import { AuthenticationError, ApolloError } from "apollo-server-express";
+import { ApolloError } from "apollo-server-express";
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { User } from "../entities/User";
 import { UserInput } from "../types";
@@ -28,9 +28,8 @@ export class userResolver {
     @Arg("password") password: String
   ): Promise<User | undefined | { error: String, status: Number }> {
     const user = User.findOne({ where: { username, password } });
-
     if (user === undefined) {
-      throw new AuthenticationError('This user not be found, please check your ids and try again');
+      throw new ApolloError('Cannot found this user, please check your credentiel', 'ERROR_USER_NOT_FOUND');
     }
     return user;
   }
