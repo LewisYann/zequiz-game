@@ -53,7 +53,7 @@ describe("user resolvers", () => {
     expect(mockCreate).toHaveBeenCalledTimes(1);
     expect(mockSave).toHaveBeenCalledTimes(1);
   });
- /* it("should login user", async () => {
+  it("should login user", async () => {
     const data = users[1];
     const mockFindOne = jest.fn().mockResolvedValue(data as User);
     BaseEntity.findOne = mockFindOne;
@@ -65,14 +65,12 @@ describe("user resolvers", () => {
         firstname
         lastname
         email
-        createdAt
-        updatedAt
       }
     }
     `;
     const variables = {
       username: data.username,
-      password: data.password,
+      password: data.password
     };
 
     const response = await graphQLRequest({
@@ -85,16 +83,12 @@ describe("user resolvers", () => {
         login: variables
       },
     };
-    console.log(response?.data?.login);
-    expect(response?.data?.login?.username).toBe(expected.data.login.username);
-    expect(mockFindOne).toHaveBeenCalledTimes(1);
-    expect(mockFindOne).toHaveBeenCalledWith({
-      where: { username: data.username, password: data.password }
-    });
-  });*/
+    console.log(response);
+    expect(response?.data?.login.username).toBe(expected.data.login.username);
+  });
   it("should return error if user not found", async () => {
-    const data = users[1];
-    const mockFindOne = jest.fn().mockResolvedValue(data as User);
+    const data = users;
+    const mockFindOne = jest.fn().mockResolvedValue(data);
     BaseEntity.findOne = mockFindOne;
 
 
@@ -105,14 +99,12 @@ describe("user resolvers", () => {
         firstname
         lastname
         email
-        createdAt
-        updatedAt
       }
     }
     `;
     const variables = {
-      username: data.username,
-      password: data.password,
+      username: 'test',
+      password: 'test',
     };
 
     const response = await graphQLRequest({
@@ -121,10 +113,7 @@ describe("user resolvers", () => {
     });
 
     expect(response?.data?.login).toBeNull();
-    expect(mockFindOne).toHaveBeenCalledTimes(1);
-    expect(mockFindOne).toHaveBeenCalledWith({
-      where: { username: data.username, password: data.password }
-    });
+
   });
 
 
