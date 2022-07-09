@@ -14,7 +14,7 @@ interface IRegisterProps { }
 
 const Login: NextPage<IRegisterProps> = () => {
   const router = useRouter();
-  const [, login] = useLoginMutation();
+  const [data, login] = useLoginMutation();
 
   return (
     <Wrapper variant="small">
@@ -25,7 +25,7 @@ const Login: NextPage<IRegisterProps> = () => {
           console.log(values)
           try {
             const user = response.data?.login;
-            if (user) {
+            if (user && response.error) {
               toast.success('Successfully, redirecting...')
               router.push(`user/${user.username}`);
             }
