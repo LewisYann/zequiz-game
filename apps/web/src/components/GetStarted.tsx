@@ -4,7 +4,7 @@ import { StepType } from "../types/GameStep";
 type GetStartedType = {
     setStep: (event: any) => void;
     setLevel: (event: any) => void;
-    level: (event: any) => void;
+    level: string;
     onStarted: (event: any) => Promise<any>;
     isLoading: boolean;
 }
@@ -17,22 +17,21 @@ function GetStarted({ setStep, setLevel, level, onStarted, isLoading }: GetStart
             justifyContent="center"
             fontWeight="bold"
             fontSize="2xl"
+            m="10"
         >
             <Box>
                 <h1>Game Rules</h1>
-
+                <br />
                 <Select onChange={(e) => setLevel(e.target.value)} >
                     <option>Select game level</option>
                     <option value="20">20</option>
-                    <option value="40">40</option>
-                    <option value="60">60</option>
-                    <option value="unlimited">Illimité</option>
+                    <option value="unlimited">Unlimited</option>
                 </Select>
+                <br />
+
                 <UnorderedList>
-                    <ListItem>Lorem ipsum dolor sit amet</ListItem>
-                    <ListItem>Consectetur adipiscing elit</ListItem>
-                    <ListItem>Integer molestie lorem at massa</ListItem>
-                    <ListItem>Facilisis in pretium nisl aliquet</ListItem>
+                    <ListItem>Level 20: Answer 20 questions  without <br /> error, and you will be a winner</ListItem>
+                    <ListItem>Level unlimited: No question limit, try <br /> to beat your record</ListItem>
                 </UnorderedList>
                 <Center>
                     <Button
@@ -41,8 +40,9 @@ function GetStarted({ setStep, setLevel, level, onStarted, isLoading }: GetStart
                         isLoading={isLoading}
                         colorScheme="blue"
                         onClick={() => onStarted({ roundType: level }).then((round: any) => {
-                            setStep(StepType.Playing)
                             console.log(round)
+                            if (round.data.createRound.publicId)
+                                setStep(StepType.Playing)
                         })}
                         style={{ justifyContent: "center", alignItems: "center", alignSelf: "center" }}
                     >

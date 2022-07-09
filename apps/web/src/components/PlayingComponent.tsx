@@ -14,28 +14,30 @@ import { Round } from "../generated/graphql"
 type PlayingType = {
     setStep: (event: any) => void;
     setNumberQuiz: (event: any) => void;
-    round: { createRound: Round };
+    round: Round;
     numberQuiz: number;
 }
 export default function PlayingComponent({ setStep, round, setNumberQuiz, numberQuiz }: PlayingType) {
-
+    console.log(round)
     const [quiz, createQuiz] = useCreateQuizMutation()
     const [check, checkQuiz] = useCheckQuizMutation()
 
     useEffect(() => {
-        if (round.createRound)
-            createQuiz({ publicId: round.createRound.publicId })
+        createQuiz({ publicId: round.publicId })
     }, [])
 
     function handleCheckResponse(response: boolean) {
         if (quiz.data?.createQuiz?.id) {
-            checkQuiz({ score: numberQuiz * 10, response: response, checkQuizId: quiz.data.createQuiz.id, publicId: round.createRound.publicId })
+            checkQuiz({ score: numberQuiz * 10, response: response, checkQuizId: quiz.data.createQuiz.id, publicId: round.publicId })
                 .then(
                     (data) => {
                         if (data.data?.checkQuiz == true) {
                             toast.success('Bravooo !')
                             setNumberQuiz((p: number) => p + 1)
-                            createQuiz({ publicId: round.createRound.publicId })
+                            if (round.roundType == "20" && numberQuiz >= 20)
+                                setStep(StepType.Success)
+                            else
+                                createQuiz({ publicId: round.publicId })
                         } else if (data.data?.checkQuiz == false) {
                             toast.error('Oopss!')
                             setStep(StepType.Failed)
@@ -86,7 +88,7 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
                         type="submit"
                         mt={4}
                         colorScheme="blue"
-                        onClick={() => createQuiz({ publicId: round.createRound.publicId })}
+                        onClick={() => createQuiz({ publicId: round.publicId })}
                         style={{ justifyContent: "center", alignItems: "center", alignSelf: "center" }}
                     >
                         Try again
@@ -103,14 +105,15 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
                 reverseOrder={false}
             />
             <Row>
-                <Col>
+                <Col md={4} sm={0}>
                 </Col>
                 <Col>
-                    <Center>
+                    <Center style={{}}>
                         <CountdownCircleTimer
                             size={150}
                             isPlaying
-                            duration={60 * 3}
+
+                            duration={60}
                             colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                             colorsTime={[7, 5, 2, 0]}
                             onComplete={() => {
@@ -125,8 +128,8 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
 
                 <Col>
                     <p>Score: {numberQuiz * 10}</p>
-                    <p>Quizzes Answered:{numberQuiz}</p>
-                    <p>Quizzes Left : {round?.createRound?.roundType}</p>
+                    <p>Quizzes Answered:{numberQuiz}/{round?.roundType}</p>
+                    <p>Quizzes Left : {round?.roundType}</p>
                 </Col>
             </Row>
             <Row >

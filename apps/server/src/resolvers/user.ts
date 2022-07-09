@@ -1,3 +1,4 @@
+import { AuthenticationError, ApolloError } from "apollo-server-express";
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { User } from "../entities/User";
 import { UserInput } from "../types";
@@ -6,7 +7,12 @@ import { UserInput } from "../types";
 export class userResolver {
   @Mutation(() => User)
   async register(@Arg("input") input: UserInput): Promise<User | undefined> {
-    return User.create(input).save();
+    try {
+      return User.create(input).save();
+    }
+    catch {
+      throw new ApolloError('Cannot register this user, please try later', 'ERROR_REGISTER');
+    }
   }
 
   @Query(() => User, { nullable: true })
@@ -24,7 +30,7 @@ export class userResolver {
     const user = User.findOne({ where: { username, password } });
 
     if (user === undefined) {
-      return { error: "Invalid username or password", status: 401 };
+      throw new AuthenticationError('This user not be found, please check your ids and try again');
     }
     return user;
   }
