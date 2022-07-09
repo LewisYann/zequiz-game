@@ -15,7 +15,7 @@ interface IRegisterProps { }
 const Login: NextPage<IRegisterProps> = () => {
   const router = useRouter();
   const [, login] = useLoginMutation();
-
+  
   return (
     <Wrapper variant="small">
       <Formik

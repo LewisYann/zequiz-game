@@ -1,21 +1,12 @@
 import { Box, Image } from "@chakra-ui/react";
 
 
-function ActorCard() {
-    const property = {
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: 'Rear view of modern home with pool',
-        beds: 3,
-        baths: 2,
-        title: 'Modern home in city center in the heart of historic Los Angeles',
-        formattedPrice: '$1,900.00',
-        reviewCount: 34,
-        rating: 4,
-    }
+function ActorCard({ quiz }) {
+    console.log("quiz", quiz)
 
     return (
         <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-            <Image src={property.imageUrl} alt={property.imageAlt} />
+            <Image src={quiz?.data?.createQuiz?.actorPicture} alt={quiz?.data?.createQuiz?.originalName} />
 
             <Box p='6'>
 
@@ -26,7 +17,7 @@ function ActorCard() {
                     lineHeight='tight'
                     noOfLines={1}
                 >
-                    {property.title}
+                    {quiz?.data?.createQuiz?.originalName}
                 </Box>
             </Box>
         </Box>

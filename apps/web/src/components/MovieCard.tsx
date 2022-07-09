@@ -1,7 +1,7 @@
 import { Box, Image, Badge } from "@chakra-ui/react";
 
 
-function MovieCard() {
+function MovieCard({ quiz }) {
     const property = {
         imageUrl: 'https://bit.ly/2Z4KKcF',
         imageAlt: 'Rear view of modern home with pool',
@@ -15,7 +15,7 @@ function MovieCard() {
 
     return (
         <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-            <Image src={property.imageUrl} alt={property.imageAlt} />
+            <Image src={quiz?.data?.createQuiz?.movieUrl} alt={quiz?.data?.createQuiz?.movieTitle} />
 
             <Box p='6'>
                 <Box
@@ -25,7 +25,7 @@ function MovieCard() {
                     lineHeight='tight'
                     noOfLines={1}
                 >
-                    {property.title}
+                    {quiz?.data?.createQuiz?.movieTitle}
                 </Box>
             </Box>
         </Box>

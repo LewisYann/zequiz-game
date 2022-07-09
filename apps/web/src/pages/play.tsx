@@ -8,16 +8,18 @@ import GetStarted from "../components/GetStarted"
 import PlayingComponent from "../components/PlayingComponent";
 import { useState } from "react";
 import { StepType } from "../types/GameStep";
+import { useCreateRoundMutation } from "../generated/graphql";
 
 
 const Play: NextPage = () => {
     const [step, setStep] = useState(StepType.Started);
     const [level, setLevel] = useState("20");
+    const [round, createRound] = useCreateRoundMutation()
 
     if (step == StepType.Started)
-        return <GetStarted setStep={setStep} setLevel={setLevel} />
+        return <GetStarted level={level} setStep={setStep} isLoading={round.fetching} setLevel={setLevel} onStarted={createRound} />
     else if (step == StepType.Playing)
-        return <PlayingComponent setStep={setStep} />
+        return <PlayingComponent setStep={setStep} round={round} />
     else if (step == StepType.Success || step == StepType.Failed)
         return <ResultPlayComponent setStep={setStep} />
 

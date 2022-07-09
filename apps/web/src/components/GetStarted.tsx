@@ -1,8 +1,7 @@
 import { UnorderedList, ListItem, Box, Grid, Button, Center, Select } from "@chakra-ui/react";
 import { StepType } from "../types/GameStep";
 
-function GetStarted({ setStep, setLevel }) {
-
+function GetStarted({ setStep, setLevel, level, onStarted, isLoading }) {
 
     return (
         <Grid
@@ -32,9 +31,12 @@ function GetStarted({ setStep, setLevel }) {
                     <Button
                         type="submit"
                         mt={4}
-                        //isLoading={isSubmitting}
+                        isLoading={isLoading}
                         colorScheme="blue"
-                        onClick={() => setStep(StepType.Playing)}
+                        onClick={() => onStarted({ roundType: level }).then((round: any) => {
+                            setStep(StepType.Playing)
+                            console.log(round)
+                        })}
                         style={{ justifyContent: "center", alignItems: "center", alignSelf: "center" }}
                     >
                         Play game

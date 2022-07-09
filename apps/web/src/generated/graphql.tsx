@@ -133,7 +133,7 @@ export type CheckQuizMutationVariables = Exact<{
   score: Scalars['Float'];
   response: Scalars['Boolean'];
   publicId: Scalars['String'];
-  checkQuizId: Scalars['Float'];
+  checkQuizId: Scalars['Int'];
 }>;
 
 

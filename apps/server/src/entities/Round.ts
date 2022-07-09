@@ -18,7 +18,7 @@ export class Round extends BaseEntity {
   publicId!: string;
   
   @Field(() => [Quiz])
-  @OneToMany(() => Quiz, (quiz) => quiz.round)
+  @OneToMany(() => Quiz, (quiz) => quiz.round,{cascade:['remove']})
   quiz!: Quiz[];
 
   @Field(() => Number)
