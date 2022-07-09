@@ -8,24 +8,25 @@ import { StepType } from "../types/GameStep";
 import { useCheckQuizMutation, useCreateQuizMutation } from '../generated/graphql';
 import { useEffect } from 'react';
 import toast, { Toaster } from "react-hot-toast";
+import renderTime from './countDown';
 
-export default function PlayingComponent({ setStep, round }) {
+export default function PlayingComponent({ setStep, round, setNumberQuiz, numberQuiz }) {
 
     const [quiz, createQuiz] = useCreateQuizMutation()
     const [check, checkQuiz] = useCheckQuizMutation()
 
-    console.log("round", round)
     useEffect(() => {
         if (round.data.createRound)
             createQuiz({ publicId: round.data.createRound.publicId })
     }, [])
 
     function handleCheckResponse(response: boolean) {
-        checkQuiz({ score: round.data.createRound.score, response: response, checkQuizId: quiz.data?.createQuiz?.id, publicId: round.data.createRound.publicId })
+        checkQuiz({ score: numberQuiz * 10, response: response, checkQuizId: quiz.data?.createQuiz?.id, publicId: round.data.createRound.publicId })
             .then(
                 (data) => {
                     if (data.data?.checkQuiz == true) {
                         toast.success('Bravooo !')
+                        setNumberQuiz((p: number) => p + 1)
                         createQuiz({ publicId: round.data.createRound.publicId })
                     } else if (data.data?.checkQuiz == false) {
                         toast.error('Oopss!')
@@ -66,22 +67,31 @@ export default function PlayingComponent({ setStep, round }) {
                 reverseOrder={false}
             />
             <Row>
-                <Center>
-                    <CountdownCircleTimer
-                        size={150}
-                        isPlaying
-                        duration={60}
-                        colors={['#004777', '#F7B801', '#A30000', '#A30000']}
-                        colorsTime={[7, 5, 2, 0]}
-                        onComplete={() => {
-                            toast('Time out')
-                            setStep(StepType.Failed)
-                        }}
-                    >
+                <Col>
+                </Col>
+                <Col>
+                    <Center>
+                        <CountdownCircleTimer
+                            size={150}
+                            isPlaying
+                            duration={60*3}
+                            colors={['#004777', '#F7B801', '#A30000', '#A30000']}
+                            colorsTime={[7, 5, 2, 0]}
+                            onComplete={() => {
+                                toast('Time out')
+                                setStep(StepType.Failed)
+                            }}
+                        >
+                            {renderTime}
+                        </CountdownCircleTimer>
+                    </Center>
+                </Col>
 
-                        {({ remainingTime }) => remainingTime}
-                    </CountdownCircleTimer>
-                </Center>
+                <Col>
+                    <p>Score: {numberQuiz * 10}</p>
+                    <p>Quizzes Answered:{numberQuiz}</p>
+                    <p>Quizzes Left : {round.data.createRound.roundType}</p>
+                </Col>
             </Row>
             <Row >
                 <Col md={6}>
@@ -141,6 +151,6 @@ export default function PlayingComponent({ setStep, round }) {
 
             </Row>
 
-        </Container>
+        </Container >
     )
 }

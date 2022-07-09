@@ -1,7 +1,7 @@
 import { UnorderedList, ListItem, Box, Grid, Button, Center, } from "@chakra-ui/react";
 import { StepType } from "../types/GameStep";
 
-const ResultPlayComponent = ({ setStep }) => {
+const ResultPlayComponent = ({ setStep, numberQuiz }) => {
 
     return (
         <Grid
@@ -14,8 +14,8 @@ const ResultPlayComponent = ({ setStep }) => {
             <Box>
                 <div style={{ textAlign: "center" }}>
                     <h1> Oops ! Game Over </h1> <br />
-                    <h1> Score: 80</h1> <br />
-                    <h3>Vous avez repondu a 5 question sur 20</h3>
+                    <h1> Score: {parseInt(numberQuiz) * 10}</h1> <br />
+                    <h3>You answered {numberQuiz} questions</h3>
                 </div>
                 <Center>
                     <Button
