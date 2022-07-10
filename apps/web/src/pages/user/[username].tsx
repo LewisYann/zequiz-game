@@ -1,13 +1,13 @@
+import React from "react";
+import { Flex } from "@chakra-ui/react";
 import { NextPage } from "next";
 import { withUrqlClient } from "next-urql";
 import { useRouter } from "next/router";
 import { useGetByUsernameQuery } from "../../generated/graphql";
 import { createUrqlClient } from "../../utils/createUrqlClient";
-import { Flex } from "@chakra-ui/react";
 
-const User: NextPage = (props) => {
+const User: NextPage = () => {
   const router = useRouter();
-  console.log('props', props)
   const username = router.query.username as string;
   const [{ data, error, fetching }] = useGetByUsernameQuery({
     variables: { username },
@@ -20,14 +20,16 @@ const User: NextPage = (props) => {
         loading...
       </Flex>
     );
-  } else if (error) {
+  }
+  else if (error) {
     return (
       <Flex alignItems="center" h="100vh" justifyContent="center">
         {" "}
         an error occurered when fetching
       </Flex>
     );
-  } else {
+  }
+  else {
     return (
       <Flex
         alignItems="center"

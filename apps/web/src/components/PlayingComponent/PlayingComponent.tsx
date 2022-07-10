@@ -8,7 +8,7 @@ import { StepType } from "../../types/GameStep";
 import { useCheckQuizMutation, useCreateQuizMutation } from '../../generated/graphql';
 import { useEffect } from 'react';
 import toast, { Toaster } from "react-hot-toast";
-import renderTime from '../CountDown/countDown';
+import RenderTime from '../CountDown/CountDown';
 import { Round } from "../../generated/graphql"
 
 /**
@@ -22,7 +22,6 @@ type PlayingType = {
     numberQuiz: number;
 }
 export default function PlayingComponent({ setStep, round, setNumberQuiz, numberQuiz }: PlayingType) {
-    console.log(round)
     const [quiz, createQuiz] = useCreateQuizMutation()
     const [check, checkQuiz] = useCheckQuizMutation()
 
@@ -35,14 +34,14 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
             checkQuiz({ score: numberQuiz * 10, response: response, checkQuizId: quiz.data.createQuiz.id, publicId: round.publicId })
                 .then(
                     (data) => {
-                        if (data.data?.checkQuiz == true) {
+                        if (data.data?.checkQuiz === true) {
                             toast.success('Bravooo !')
                             setNumberQuiz((p: number) => p + 1)
-                            if (round.roundType == "20" && numberQuiz >= 20)
+                            if (round.roundType === "20" && numberQuiz >= 20)
                                 setStep(StepType.Success)
                             else
                                 createQuiz({ publicId: round.publicId })
-                        } else if (data.data?.checkQuiz == false) {
+                        } else if (data.data?.checkQuiz === false) {
                             toast.error('Oopss!')
                             setStep(StepType.Failed)
                         }
@@ -125,7 +124,7 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
                                 setStep(StepType.Failed)
                             }}
                         >
-                            {renderTime}
+                            {RenderTime}
                         </CountdownCircleTimer>
                     </Center>
                 </Col>
@@ -139,12 +138,14 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
             <Row >
                 <Col md={6}>
                     <Center>
+                        {/*@ts-ignore*/}
                         <ActorCard quiz={quiz.data} />
                     </Center>
 
                 </Col>
                 <Col md={6}>
                     <Center>
+                        {/*@ts-ignore*/}
                         <MovieCard quiz={quiz.data} />
                     </Center>
 
@@ -154,6 +155,7 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
             <br />
             <Row>
                 <Center>
+                    {/*@ts-ignore*/}
                     <QuizCard quiz={quiz.data} />
                 </Center>
 

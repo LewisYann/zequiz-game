@@ -1,3 +1,4 @@
+import React from "react";
 import { FC, InputHTMLAttributes } from "react";
 import { useField } from "formik";
 import {
@@ -23,16 +24,17 @@ export const InputField: FC<IInputFieldProps> = ({
   size: _,
   ...props
 }) => {
+  //@ts-ignore
   const [field, { error }] = useField(props);
   return (
     <FormControl isInvalid={!!error}>
       <FormLabel htmlFor={field.name}>{label}</FormLabel>
+      {/*@ts-ignore*/}
       <Input
         {...field}
         {...props}
         id={field.name}
         placeholder={props.placeholder}
-
       />
       {error ? <FormErrorMessage>{error}</FormErrorMessage> : null}
     </FormControl>

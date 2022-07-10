@@ -1,3 +1,4 @@
+
 import gql from 'graphql-tag';
 import * as Urql from 'urql';
 export type Maybe<T> = T | null;
@@ -210,6 +211,7 @@ export const CheckQuizDocument = gql`
     `;
 
 export function useCheckQuizMutation() {
+  {/*@ts-ignore*/ }
   return Urql.useMutation<CheckQuizMutation, CheckQuizMutationVariables>(CheckQuizDocument);
 };
 export const CreateQuizDocument = gql`
@@ -238,6 +240,7 @@ export const CreateQuizDocument = gql`
     `;
 
 export function useCreateQuizMutation() {
+  {/*@ts-ignore*/ }
   return Urql.useMutation<CreateQuizMutation, CreateQuizMutationVariables>(CreateQuizDocument);
 };
 export const CreateRoundDocument = gql`
@@ -253,6 +256,7 @@ export const CreateRoundDocument = gql`
     `;
 
 export function useCreateRoundMutation() {
+  {/*@ts-ignore*/ }
   return Urql.useMutation<CreateRoundMutation, CreateRoundMutationVariables>(CreateRoundDocument);
 };
 export const LoginDocument = gql`
@@ -269,6 +273,7 @@ export const LoginDocument = gql`
     `;
 
 export function useLoginMutation() {
+  {/*@ts-ignore*/ }
   return Urql.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument);
 };
 export const RegisterDocument = gql`
@@ -283,6 +288,7 @@ export const RegisterDocument = gql`
     `;
 
 export function useRegisterMutation() {
+  {/*@ts-ignore*/ }
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
 };
 export const UpdateScoreDocument = gql`
@@ -298,6 +304,7 @@ export const UpdateScoreDocument = gql`
     `;
 
 export function useUpdateScoreMutation() {
+  {/*@ts-ignore*/ }
   return Urql.useMutation<UpdateScoreMutation, UpdateScoreMutationVariables>(UpdateScoreDocument);
 };
 export const GetByUsernameDocument = gql`
@@ -313,6 +320,7 @@ export const GetByUsernameDocument = gql`
     `;
 
 export function useGetByUsernameQuery(options: Omit<Urql.UseQueryArgs<GetByUsernameQueryVariables>, 'query'>) {
+  {/*@ts-ignore*/ }
   return Urql.useQuery<GetByUsernameQuery>({ query: GetByUsernameDocument, ...options });
 };
 export const GetQuizByIdDocument = gql`
@@ -338,6 +346,7 @@ export const GetQuizByIdDocument = gql`
     `;
 
 export function useGetQuizByIdQuery(options: Omit<Urql.UseQueryArgs<GetQuizByIdQueryVariables>, 'query'>) {
+  {/*@ts-ignore*/ }
   return Urql.useQuery<GetQuizByIdQuery>({ query: GetQuizByIdDocument, ...options });
 };
 export const GetRoundByIdDocument = gql`
@@ -367,5 +376,6 @@ export const GetRoundByIdDocument = gql`
     `;
 
 export function useGetRoundByIdQuery(options: Omit<Urql.UseQueryArgs<GetRoundByIdQueryVariables>, 'query'>) {
+  {/*@ts-ignore*/ }
   return Urql.useQuery<GetRoundByIdQuery>({ query: GetRoundByIdDocument, ...options });
 };

@@ -1,3 +1,4 @@
+import React from "react";
 import { UnorderedList, ListItem, Box, Grid, Button, Center, Select } from "@chakra-ui/react";
 import { StepType } from '../../types/GameStep'
 
@@ -43,7 +44,6 @@ function GetStarted({ setStep, setLevel, level, onStarted, isLoading }: GetStart
                         isLoading={isLoading}
                         colorScheme="blue"
                         onClick={() => onStarted({ roundType: level }).then((round: any) => {
-                            console.log(round)
                             if (round.data.createRound.publicId)
                                 setStep(StepType.Playing)
                         })}

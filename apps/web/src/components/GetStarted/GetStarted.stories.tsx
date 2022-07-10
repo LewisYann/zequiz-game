@@ -1,11 +1,10 @@
-
+import React from 'react';
 import GetStarted from './GetStarted';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
+export default  {
     title: 'Game/Get Started',
     component: GetStarted,
-
 };
 
 const Template = (args: JSX.IntrinsicAttributes) => <GetStarted setStep={function (): void {

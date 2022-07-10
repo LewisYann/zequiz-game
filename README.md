@@ -13,7 +13,6 @@ A typescript fullstack starter with all modern tools for coding quickly and soft
 ## what
 
 ## Setup your project
- 
 ```
 ./setup.sh
 ```

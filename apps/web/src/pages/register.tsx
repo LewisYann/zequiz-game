@@ -1,13 +1,15 @@
+import React from "react";
 import { NextPage } from "next";
-import { Formik, Form } from "formik";
-import { Wrapper } from "../components/Wrapper/Wrapper";
-import { Box, Button } from "@chakra-ui/react";
-import { InputField } from "../components/InputField/InputField";
 import { withUrqlClient } from "next-urql";
+import { useRouter } from "next/router";
+import { Formik, Form } from "formik";
+import { Box, Button } from "@chakra-ui/react";
+import toast from "react-hot-toast";
+import { InputField } from "../components/InputField/InputField";
 import { createUrqlClient } from "../utils/createUrqlClient";
 import { useRegisterMutation } from "../generated/graphql";
-import { useRouter } from "next/router";
-import toast from "react-hot-toast";
+import Wrapper from "../components/Wrapper/Wrapper";
+
 
 interface IRegisterProps { }
 
@@ -28,7 +30,7 @@ const Register: NextPage<IRegisterProps> = () => {
           try {
             const response = await register({ input: values });
             const user = response.data?.register;
-            if (user && response.error) {
+            if (user && !response.error) {
               toast.success('Successfully, redirecting...')
               router.push(`user/${user.username}`);
             }
@@ -45,13 +47,14 @@ const Register: NextPage<IRegisterProps> = () => {
             <InputField
               name="username"
               placeholder="username"
-              label="Username"            
+              label="Username"
+              isRequired={true}
             />
             <InputField
               name="firstname"
               placeholder="Your firstname"
-              label="Firstname"  
-              isRequired={true}      
+              label="Firstname"
+              isRequired={true}
             />
             <InputField
               name="lastname"
@@ -65,6 +68,8 @@ const Register: NextPage<IRegisterProps> = () => {
                 placeholder="email"
                 label="Email"
                 type="email"
+                isRequired={true}
+
               />
             </Box>
             <Box mt={4}>
@@ -74,7 +79,6 @@ const Register: NextPage<IRegisterProps> = () => {
                 label="Password"
                 type="password"
                 isRequired={true}
-
               />
             </Box>
             <Button

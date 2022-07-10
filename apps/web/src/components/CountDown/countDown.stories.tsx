@@ -1,5 +1,5 @@
 
-import CountDown from './countDown';
+import CountDown from './CountDown';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

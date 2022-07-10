@@ -4,7 +4,7 @@ import { Formik, Form } from "formik";
 import { Box, Button } from "@chakra-ui/react";
 import { withUrqlClient } from "next-urql";
 import { useRouter } from "next/router";
-import { Wrapper } from "../components/Wrapper/Wrapper";
+import Wrapper from "../components/Wrapper/Wrapper";
 import { InputField } from "../components/InputField/InputField";
 import { createUrqlClient } from "../utils/createUrqlClient";
 import { useLoginMutation } from "../generated/graphql";
@@ -22,10 +22,9 @@ const Login: NextPage<IRegisterProps> = () => {
         initialValues={{ username: "", password: "" }}
         onSubmit={async (values) => {
           const response = await login(values);
-          console.log(values)
           try {
             const user = response.data?.login;
-            if (user && response.error) {
+            if (user && !response.error) {
               toast.success('Successfully, redirecting...')
               router.push(`user/${user.username}`);
             }

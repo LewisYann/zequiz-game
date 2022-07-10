@@ -1,3 +1,4 @@
+import React from "react";
 import { Box, Image } from "@chakra-ui/react";
 import { Quiz } from "../../generated/graphql"
 
@@ -5,7 +6,7 @@ import { Quiz } from "../../generated/graphql"
  * Card component for display Movie info
  */
 
-function MovieCard({ quiz }: { quiz: { createQuiz: Quiz }  }) {
+function MovieCard({ quiz }: { quiz: { createQuiz: Quiz } }) {
 
     return (
         <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>

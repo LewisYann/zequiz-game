@@ -4,7 +4,7 @@ import React, { useRef, useState } from "react";
  * Custom render  for down counter
  */
 
-const renderTime = ({ remainingTime }: { remainingTime: number }) => {
+const RenderTime = ({ remainingTime }: { remainingTime: number }) => {
     const currentTime = useRef(remainingTime);
     const prevTime = useRef(0);
     const isNewTimeFirstTick = useRef(false);
@@ -44,4 +44,4 @@ const renderTime = ({ remainingTime }: { remainingTime: number }) => {
     );
 };
 
-export default renderTime;
+export default RenderTime;

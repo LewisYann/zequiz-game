@@ -1,3 +1,4 @@
+import React from "react";
 import { Box, Image } from "@chakra-ui/react";
 import { Quiz } from "../../generated/graphql";
 
@@ -6,7 +7,6 @@ import { Quiz } from "../../generated/graphql";
  */
 
 function ActorCard({ quiz }: { quiz: { createQuiz: Quiz } }) {
-    console.log("quiz", quiz)
 
     return (
         <Box maxW='xs' borderWidth='1px' borderRadius='lg' overflow='hidden'>

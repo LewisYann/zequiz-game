@@ -28,15 +28,30 @@ module.exports = {
   },
   rules: {
     // react
-    'react/function-component-definition': [
-      2,
-      {
-        namedComponents: 'arrow-function',
-      },
-    ],
-
+    'react/react-in-jsx-scope': 'off',
+    'react-hooks/exhaustive-deps': 'off',
+    'react/jsx-no-useless-fragment': 'off',
+    'react/jsx-boolean-value': 'off',
+    'react/function-component-definition': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'react/jsx-no-bind': 'off',
+    'react/require-default-props': 'off',
+    "react/self-closing-comp": "off",
+    "react/jsx-curly-brace-presence": "off",
     // next
     '@next/next/no-html-link-for-pages': 'off',
+    "spaced-comment": "off",
+    "no-unescaped-entities": "off",
+    "react/no-unescaped-entities": "off",
+    "import/order": "off",
+    "import/no-duplicates": "off",
+    "import/prefer-default-export": "off",
+    "no-lone-blocks": "off",
+    "no-else-return": "off",
+    "func-names": "off",
+    "object-shorthand": "off",
+
+
   },
   overrides: [
     {
