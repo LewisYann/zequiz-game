@@ -12,7 +12,38 @@ A typescript fullstack starter with all modern tools for coding quickly and soft
 
 ## what
 
-## how
+## Setup your project
+```
+./setup.sh
+```
+## Run project
+ 
+```
+yarn dev
+```
+
+## Run frontend project
+Your can run frontend workspace only
+ 
+```
+yarn workspace web dev
+```
+
+## Run backend project
+Your can run backend workspace only
+ 
+```
+yarn workspace server dev
+```
+
+## More info about workspace available
+Your can run backend workspace only
+ 
+```
+yarn workspaces info
+```
+
+
 
 ### front libraries
 
@@ -64,6 +95,10 @@ BACK_END_URL=http://localhost:4000/
 FRONT_END_URL=http://localhost:3000
 # sudio Apollo graphql URL
 STUDIO_APOLLO_GRAPHQL_URL=https://studio.apollographql.com
+STUDIO_APOLLO_GRAPHQL_URL=https://studio.apollographql.com
+PICTURE_URL=http://image.tmdb.org/t/p/w500
+MOVIE_URL=https://api.themoviedb.org
+API_KEY=f797a48d40f189b038093795534b113b
 ```
 
 - create `.env.database` file and add the following variables (adapt to your environment).

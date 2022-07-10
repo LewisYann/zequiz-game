@@ -1,0 +1,9 @@
+mutation UpdateScore($score: Float!, $publicId: String!) {
+  updateScore(score: $score, publicId: $publicId) {
+    publicId
+    score
+    roundType
+    createdAt
+    updatedAt
+  }
+}

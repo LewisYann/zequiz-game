@@ -1,0 +1,23 @@
+query GetRoundById($publicId: String!) {
+  getRoundById(publicId: $publicId) {
+    publicId
+    quiz {
+      id
+      adult
+      actorName
+      originalName
+      actorPicture
+      movieTitle
+      movieDescription
+      releaseDate
+      movieUrl
+      quizType
+      createdAt
+      updatedAt
+    }
+    score
+    roundType
+    createdAt
+    updatedAt
+  }
+}

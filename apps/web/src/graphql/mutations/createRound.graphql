@@ -1,0 +1,9 @@
+mutation CreateRound($roundType: String!) {
+  createRound(roundType: $roundType) {
+    publicId
+    score
+    roundType
+    createdAt
+    updatedAt
+  }
+}
