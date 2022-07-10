@@ -5,11 +5,15 @@ import ActorCard from "../ActorCard/ActorCard";
 import MovieCard from "../MovieCard/MovieCard";
 import QuizCard from "../QuizCard/QuizCard";
 import { StepType } from "../../types/GameStep";
-import { useCheckQuizMutation, useCreateQuizMutation } from '../generated/graphql';
+import { useCheckQuizMutation, useCreateQuizMutation } from '../../generated/graphql';
 import { useEffect } from 'react';
 import toast, { Toaster } from "react-hot-toast";
 import renderTime from '../CountDown/countDown';
 import { Round } from "../../generated/graphql"
+
+/**
+ * Display quizzes and actor
+ */
 
 type PlayingType = {
     setStep: (event: any) => void;

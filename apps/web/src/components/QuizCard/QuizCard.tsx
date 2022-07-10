@@ -5,6 +5,10 @@ import {
 } from '@chakra-ui/react'
 import { Quiz } from '../../generated/graphql';
 
+/**
+ * Card component for display Quiz
+ */
+
 const QuizCard = ({ quiz }: { quiz: { createQuiz: Quiz } }) => {
 
     return (

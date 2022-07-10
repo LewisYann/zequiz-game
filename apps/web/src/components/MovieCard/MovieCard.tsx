@@ -1,6 +1,9 @@
 import { Box, Image } from "@chakra-ui/react";
-import { Quiz } from "../generated/graphql"
+import { Quiz } from "../../generated/graphql"
 
+/**
+ * Card component for display Movie info
+ */
 
 function MovieCard({ quiz }: { quiz: { createQuiz: Quiz }  }) {
 

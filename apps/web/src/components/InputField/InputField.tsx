@@ -7,6 +7,10 @@ import {
   Input,
 } from "@chakra-ui/react";
 
+/**
+ * UI Default input
+ */
+
 type IInputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string;
   placeholder?: string;
@@ -28,7 +32,7 @@ export const InputField: FC<IInputFieldProps> = ({
         {...props}
         id={field.name}
         placeholder={props.placeholder}
-        
+
       />
       {error ? <FormErrorMessage>{error}</FormErrorMessage> : null}
     </FormControl>

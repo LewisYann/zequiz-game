@@ -1,5 +1,9 @@
 import { UnorderedList, ListItem, Box, Grid, Button, Center, Select } from "@chakra-ui/react";
-import {StepType} from '../../types/GameStep'
+import { StepType } from '../../types/GameStep'
+
+/**
+ * Starter game screen component 
+ */
 
 type GetStartedType = {
     setStep: (event: any) => void;

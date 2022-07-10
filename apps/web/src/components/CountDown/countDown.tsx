@@ -1,5 +1,8 @@
 import React, { useRef, useState } from "react";
 
+/**
+ * Custom render  for down counter
+ */
 
 const renderTime = ({ remainingTime }: { remainingTime: number }) => {
     const currentTime = useRef(remainingTime);
