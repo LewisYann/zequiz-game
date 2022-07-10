@@ -1,3 +1,3 @@
 #! /bin/sh
 yarn watch >>watchlog.txt &
-yarn dev
+yarn workspace dev

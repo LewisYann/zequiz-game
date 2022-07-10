@@ -49,7 +49,7 @@ const Home: NextPage = () => {
           <NextLink href="/login" passHref>
             <Link
               p="6"
-              mt="6"
+              m="6"
               w="96"
               border="1px"
               rounded="xl"
@@ -68,7 +68,7 @@ const Home: NextPage = () => {
           <NextLink href="/register" passHref>
             <Link
               p="6"
-              mt="6"
+              m="6"
               w="96"
               border="1px"
               rounded="xl"
