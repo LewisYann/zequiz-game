@@ -12,15 +12,15 @@ export default {
 const Template = (args: JSX.IntrinsicAttributes) => <MovieCard quiz={{
     createQuiz: {
         __typename: undefined,
-        actorName: '',
-        actorPicture: '',
+        actorName: 'Show Lewis',
+        actorPicture: 'http://image.tmdb.org/t/p/w500//kQh7U7kRLF9NKEMpxiGjZEIu0o3.jpg',
         adult: false,
         createdAt: '',
         id: 0,
         movieDescription: '',
-        movieTitle: '',
-        movieUrl: '',
-        originalName: '',
+        movieTitle: 'Avatar',
+        movieUrl: 'http://image.tmdb.org/t/p/w500//kQh7U7kRLF9NKEMpxiGjZEIu0o3.jpg',
+        originalName: 'Lewis',
         quizType: false,
         releaseDate: '',
         round: {

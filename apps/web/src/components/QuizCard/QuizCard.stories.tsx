@@ -12,20 +12,18 @@ export default {
 
 const Template = (args: JSX.IntrinsicAttributes) => <QuizCard quiz={{
     createQuiz: {
-        __typename: undefined,
-        actorName: '',
+        actorName: 'Show Lewis',
         actorPicture: '',
         adult: false,
         createdAt: '',
         id: 0,
         movieDescription: '',
-        movieTitle: '',
+        movieTitle: 'Avatar',
         movieUrl: '',
-        originalName: '',
+        originalName: 'Lewis',
         quizType: false,
         releaseDate: '',
         round: {
-            __typename: undefined,
             createdAt: '',
             publicId: '',
             quiz: [],
