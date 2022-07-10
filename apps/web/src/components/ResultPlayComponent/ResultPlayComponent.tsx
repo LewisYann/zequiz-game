@@ -1,6 +1,6 @@
 import { Box, Grid, Button, Center, } from "@chakra-ui/react";
-import { Round } from "../generated/graphql";
-import { StepType } from "../types/GameStep";
+import { Round } from "../../generated/graphql";
+import { StepType } from "../../types/GameStep";
 
 const ResultPlayComponent = ({ setStep, numberQuiz, round, setNumberQuiz }: { setNumberQuiz: (event: any) => void, setStep: (event: any) => void, numberQuiz: number, round: Round }) => {
 

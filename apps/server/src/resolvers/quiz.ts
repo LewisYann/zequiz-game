@@ -75,7 +75,6 @@ export class quizResolver {
             const sup = 20 - wrongQuiz[1] + trueQuiz[1]
             if (wrongQuiz[1] > trueQuiz[1]) {
                 const actor = await getMoviesDetails(movie.id, round?.roundType)
-                //console.log("xsd", quizzes)
                 return Quiz.create({
                     adult: movie.adult,
                     actorName: actor?.character || actor?.job,
@@ -91,7 +90,6 @@ export class quizResolver {
                 }).save()
             } else if (wrongQuiz[1] < trueQuiz[1]) {
                 const actor = await getMoviesDetails(movie.id, round?.roundType, false)
-                //console.log("xsd", quizzes)
                 return Quiz.create({
                     adult: movie.adult,
                     actorName: actor?.character || actor?.job,
@@ -107,7 +105,6 @@ export class quizResolver {
                 }).save()
             } else if (sup > 0) {
                 const actor = await getMoviesDetails(movie.id, round?.roundType)
-                //console.log("xsd", quizzes)
                 return Quiz.create({
                     adult: movie.adult,
                     actorName: actor?.character || actor?.job,

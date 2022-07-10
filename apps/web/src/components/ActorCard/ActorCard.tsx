@@ -1,5 +1,5 @@
 import { Box, Image } from "@chakra-ui/react";
-import { Quiz } from "../generated/graphql";
+import { Quiz } from "../../generated/graphql";
 
 
 function ActorCard({ quiz }: { quiz: { createQuiz: Quiz } }) {

@@ -3,7 +3,7 @@ import {
     StatLabel,
     StatNumber
 } from '@chakra-ui/react'
-import { Quiz } from '../generated/graphql';
+import { Quiz } from '../../generated/graphql';
 
 const QuizCard = ({ quiz }: { quiz: { createQuiz: Quiz } }) => {
 

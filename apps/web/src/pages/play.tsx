@@ -1,9 +1,9 @@
 import { NextPage } from "next";
 import { withUrqlClient } from "next-urql";
 import { createUrqlClient } from "../utils/createUrqlClient";
-import ResultPlayComponent from "../components/ResultPlayComponent";
-import GetStarted from "../components/GetStarted"
-import PlayingComponent from "../components/PlayingComponent";
+import ResultPlayComponent from "../components/ResultPlayComponent/ResultPlayComponent";
+import GetStarted from "../components/GetStarted/GetStarted"
+import PlayingComponent from "../components/PlayingComponent/PlayingComponent";
 import { useState } from "react";
 import { StepType } from "../types/GameStep";
 import { useCreateRoundMutation } from "../generated/graphql";

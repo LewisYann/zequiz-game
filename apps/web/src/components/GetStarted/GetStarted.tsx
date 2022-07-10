@@ -1,5 +1,5 @@
 import { UnorderedList, ListItem, Box, Grid, Button, Center, Select } from "@chakra-ui/react";
-import { StepType } from "../types/GameStep";
+import {StepType} from '../../types/GameStep'
 
 type GetStartedType = {
     setStep: (event: any) => void;
@@ -28,7 +28,6 @@ function GetStarted({ setStep, setLevel, level, onStarted, isLoading }: GetStart
                     <option value="unlimited">Unlimited</option>
                 </Select>
                 <br />
-
                 <UnorderedList>
                     <ListItem>Level 20: Answer 20 questions  without <br /> error, and you will be a winner</ListItem>
                     <ListItem>Level unlimited: No question limit, try <br /> to beat your record</ListItem>

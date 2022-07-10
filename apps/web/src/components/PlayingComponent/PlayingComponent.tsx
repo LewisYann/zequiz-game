@@ -1,15 +1,15 @@
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import { Button, Center, Spinner, Flex, Grid } from "@chakra-ui/react";
 import { Container, Row, Col } from "react-bootstrap";
-import ActorCard from "../components/ActorCard";
-import MovieCard from "../components/MovieCard";
-import QuizCard from "../components/QuizCard";
-import { StepType } from "../types/GameStep";
+import ActorCard from "../ActorCard/ActorCard";
+import MovieCard from "../MovieCard/MovieCard";
+import QuizCard from "../QuizCard/QuizCard";
+import { StepType } from "../../types/GameStep";
 import { useCheckQuizMutation, useCreateQuizMutation } from '../generated/graphql';
 import { useEffect } from 'react';
 import toast, { Toaster } from "react-hot-toast";
-import renderTime from './countDown';
-import { Round } from "../generated/graphql"
+import renderTime from '../CountDown/countDown';
+import { Round } from "../../generated/graphql"
 
 type PlayingType = {
     setStep: (event: any) => void;
