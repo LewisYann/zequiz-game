@@ -5,7 +5,6 @@ import Head from "next/head";
 import { Flex, Text, Link, Code, Heading } from "@chakra-ui/react";
 
 const Home: NextPage = () => {
-  const router = useRouter()
   return (
     <Flex direction="column" align="center" justify="center" py="3" h="100vh">
       <Head>
@@ -28,7 +27,7 @@ const Home: NextPage = () => {
         </Heading>
 
         <Text mt="3" fontSize="2xl">
-          Get started by editing{" "}
+          Get started by {" "}
           <Code
             p="3"
             fontSize="lg"
@@ -45,7 +44,7 @@ const Home: NextPage = () => {
           align="center"
           justify="space-around"
           maxW={["full", "4xl"]}
-          mt="6"
+          m="6"
         >
           <NextLink href="/login" passHref>
             <Link
@@ -86,6 +85,45 @@ const Home: NextPage = () => {
           </NextLink>
 
 
+        </Flex>
+        <Text mt="3" fontSize="2xl">
+          Play ZeQuiz game in
+          <Code
+            p="3"
+            fontSize="lg"
+            bgColor="black.100"
+            borderRadius="md"
+            className="font-mono"
+          >
+            part two
+          </Code>
+        </Text>
+
+        <Flex
+          wrap="wrap"
+          align="center"
+          justify="space-around"
+          maxW={["full", "4xl"]}
+          mt="6"
+        >
+          <NextLink href="/play" passHref>
+            <Link
+              p="6"
+              mt="6"
+              w="96"
+              border="1px"
+              rounded="xl"
+              color="blue.600"
+              textAlign="left"
+            >
+              <Heading fontSize="2xl" fontWeight="bold">
+                Ze Quiz game &rarr;
+              </Heading>
+              <Text mt="4" size="xl">
+                Let's enjoy
+              </Text>
+            </Link>
+          </NextLink>
         </Flex>
       </Flex>
 

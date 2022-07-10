@@ -14,7 +14,7 @@ interface IRegisterProps { }
 
 const Login: NextPage<IRegisterProps> = () => {
   const router = useRouter();
-  const [data, login] = useLoginMutation();
+  const [, login] = useLoginMutation();
 
   return (
     <Wrapper variant="small">
