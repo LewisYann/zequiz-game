@@ -1,6 +1,6 @@
-import { createConnection, getConnection, getConnectionOptions } from "typeorm";
+import { createConnection, getConnection, getConnectionOptions , Connection } from "typeorm";
 import { SnakeNamingStrategy } from "typeorm-naming-strategies";
-import { Connection } from "typeorm";
+
 import path from "path";
 
 
@@ -8,7 +8,7 @@ console.log(path.join(__dirname, "..", "/entities/*.ts"));
 
 
 export const openDBConnection = async (drop = true): Promise<Connection> => {
-  const name = process.env.NODE_ENV;
+  const name = process.env.APP_ENV;
   const connectionOptions = await getConnectionOptions(name);
   return createConnection({
     ...connectionOptions,

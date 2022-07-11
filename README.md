@@ -165,7 +165,7 @@ NEXT_PUBLIC_BACK_END_URL=http://localhost:4000/graphql
 
 ## to do
 
-- create a make file to easy up the starting
+- create a make file to easy up the starting :
 - Add prettier and es-lint config
 - add husky for pre-commit stage
 - add mono repo with `turbo repo`
