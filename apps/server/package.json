@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "watch": "tsc -w",
-    "dev": "cd src&&set NODE_ENV=development&node ./src/index.ts",
+    "dev": "set NODE_ENV=development&nodemon ./src/index.ts",
     "start": "set NODE_ENV=development node ./dist/index.js",
     "build": "tsc",
     "test": "jest -c jest.config.js"

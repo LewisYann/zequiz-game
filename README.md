@@ -85,8 +85,6 @@ Finally run
 yarn workspace web gen 
 ```
 
-### Docker 
-
 ## Run Locally
 
 Clone the project
@@ -104,6 +102,38 @@ Go to the project directory
 #### Install dependencies
  
 Use one methode about Installion section
+
+#### Database configuration
+ 
+Update your `.env` file with correct informations of your locally database and then, set you db type `apps/server/src/utils/index.ts`
+
+```bash
+   return createConnection({
+    type: 'postgres', //update this line, 
+    database: config.development.db,
+    namingStrategy: new SnakeNamingStrategy(),
+    name: process.env.NODE_ENV,
+    synchronize: drop,
+    dropSchema: drop,
+    logging: config.env === "development",
+    entities: [
+      path.join(__dirname, "..", "/entities/*.ts")
+    ],
+    migrations: [
+      path.join(__dirname, "..", "/migrations/*.ts")
+    ],
+    cli: {
+      entitiesDir: "/apps/server/src/entities/*.ts",
+      migrationsDir: "/apps/server/.dist/*.ts",
+    },
+    host: config.development.host,
+    port: Number(config.development.port),
+    username: config.development.user,
+    password: config.development.password
+  });
+```
+
+
 
 #### Start the server
 
