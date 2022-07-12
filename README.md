@@ -1,69 +1,9 @@
-# typescript-fullstack-starter
 
-A typescript fullstack starter with all modern tools for coding quickly and softly
-
-## Why
-
-### Javascript fatigue
-
-### set up new project faster
-
-### master some key concepts (without switching between to many tools)
-
-## what
-
-## Setup your project
-```
-./setup.sh
-```
-## Run project
- 
-```
-yarn dev
-```
-
-## Run frontend project
-Your can run frontend workspace only
- 
-```
-yarn workspace web dev
-```
-
-## Run backend project
-Your can run backend workspace only
- 
-```
-yarn workspace server dev
-```
-
-## More info about workspace available
-Your can run backend workspace only
- 
-```
-yarn workspaces info
-```
+#   Ze Quiz 
 
 
 
-### front libraries
-
-### back libraries
-
-### overall strategy
-
-## requirements
-
-you need the followings tool installed in your environment
-
-- docker
-- docker-compose
-- node `16.13.1` and bigger
-- yarn
-
-## Set up
-
-:warning: If your are working on windows system, you will need to create your own entrypoint.sh (in server folder) with the command inside the provided, then delete the provided.This is because windows end of line character (and others) are different from linux one.
-
+## Environment Variables
 ### Server
 
 - cd `server` directory
@@ -101,18 +41,6 @@ MOVIE_URL=https://api.themoviedb.org
 API_KEY=f797a48d40f189b038093795534b113b
 ```
 
-- create `.env.database` file and add the following variables (adapt to your environment).
-
-```
-POSTGRES_PASSWORD=valery
-POSTGRES_USER=valentino
-POSTGRES_DB=starter-dev
-```
-
-- Make sure you have the same environment variables for database in both env file
-- run `yarn`
-- run `yarn build`
-
 ### Web
 
 - cd `web` directory
@@ -122,52 +50,160 @@ POSTGRES_DB=starter-dev
 # back-end URL
 NEXT_PUBLIC_BACK_END_URL=http://localhost:4000/graphql
 ```
+## Installation
 
-- run `yarn`
+### Automatical setup
 
-## launch
 
-- run `sudo docker-compose up`. The sudo is needed only for the first launch
-- all your updates are reflected to the container. You can code peacefully
+Install automatically project by lunch setup.sh
 
-### server
+```bash
+  ./setup.sh
+```
+### Manual  setup
 
-- go to `https://studio.apollographql.com/sandbox/explorer`
+Install automatically project by following this step:
 
-### web
+- Step 1 : setup and install all depencies
+```bash
+yarn install //Install global mono repo dependencies
+yarn workspace server install //Install server dependencies
+yarn workspace web install //Install frontend server depencidencies
+```
 
-- go to `http://localhost:3000/register`
+- Step 2 : Prepare husky
+```bash
+yarn prepare //In root project
+```
+- Step 3 : Generate graphql schema
+You need to run server before with 
+```bash
+yarn workspace server dev
+```
+Finally run 
+```bash
+yarn workspace web gen 
+```
 
-## Docs
+### Docker 
 
-### overall
+## Run Locally
 
-- [typescript](https://www.typescriptlang.org/)
-- [graphql](https://graphql.org/)
-- [docker](https://www.docker.com/)
-- [docker-compose](https://docs.docker.com/compose/)
-- [Ben Awad](https://www.youtube.com/watch?v=I6ypD7qv3Z8)
+Clone the project
 
-### front
+```bash
+  git clone https://link-to-project
+```
 
-- [Next Js](https://nextjs.org/)
-- [urql](https://formidable.com/open-source/urql/)
-- [graphql-codegen](https://www.graphql-code-generator.com/)
-- [Chakra UI](https://chakra-ui.com/)
-- [Formik](https://formik.org/)
+Go to the project directory
 
-### back
+```bash
+  cd my-project
+```
 
-- [express](https://expressjs.com/)
-- [Apollo server](https://www.apollographql.com/docs/apollo-server/)
-- [type-graphql](https://typegraphql.com/)
-- [Typeorm](https://typeorm.io/)
+#### Install dependencies
+ 
+Use one methode about Installion section
+
+#### Start the server
+
+```bash
+  yarn dev 
+```
+
+#### or  run build with 
+```bash
+  yarn build
+  yarn start  
+```
+
+
+
+## Running Tests
+
+To run tests, run the following command
+
+```bash
+  yarn test
+```
+
+
+## Frontend route reference
+
+#### Login
+
+```http
+ /login
+```
+#### Register an user
+
+```http
+ /register
+```
+
+#### play game
+
+```http
+ /play
+```
+
+
+
+## Features
+
+- Login
+Just complete login form and submit it
+
+- Register
+ Complete Register form and submit 
+
+- Playing Ze quiz game
+#### Game Rules
+
+1- Here you don't need to login.
+
+2- You lost when time is out, provide wrong answers or you have a limitation quiz
+
+3- You need to select type of round that you want to play. 
+
+4- First round level is Level 20. This one, limit the quiz number of the roud to 20.
+
+5- Second round level is Unlimited. No limitation of quiz. Le round close when provide one wrong response to the answers
+
+6- If you lose, you can replay by clicking Replay game
+
+
+
+
+
+
+
+
+## Mono repo Architecture 
+
+Global Architecture used 
+
+#### Frontend route
+
+
+| Folder | Workspace     | Role                       |
+| :-------- | :------- | :-------------------------------- |
+| `/apps/web`      | `web` | Contain Frontend app |
+| `/apps/server`      | `server` | Contain server app |
+| `/packages/config`      | `config` | Contain eslint and jest config  |
+| `/packages/tsconfig`      | `tsconfig` | TypeScript configuration |
+| `.storybook`      | `` | storybook config |
+| `.husky`      | `` | husky config |
+| `turbo.json`      | `` | turbo repo configuration |
+
+
+If you want to add an another app,it will be added in `/apps` folder, and another configuration structure in `/packages`
 
 ## to do
 
-- create a make file to easy up the starting :
-- Add prettier and es-lint config
-- add husky for pre-commit stage
-- add mono repo with `turbo repo`
-- add ci steps to manage many environment
-- add storybook
+- create a make file to easy up the starting : (Done)
+- Add prettier and es-lint config  (Done)
+- add husky for pre-commit stage  (Done)
+- add mono repo with `turbo repo`  (Done)
+- add ci steps to manage many environment  (Done)
+- add storybook  (Done)

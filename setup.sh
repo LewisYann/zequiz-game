@@ -11,10 +11,10 @@ yarn workspace $server_workspace install
 echo "Step 2 : husky prepare"
 yarn prepare
 
-echo "Step 2 : generate graphql schema"
+echo "Step 3 : generate graphql schema"
 #generate graphql schema
 yarn workspace $server_workspace dev & yarn workspace $web_workspace gen & fg
 
-echo "Step 3 : Finish process..."
+echo "Step 4 : Finish process..."
 
-exit 1
+exit 0

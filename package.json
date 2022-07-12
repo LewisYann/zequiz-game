@@ -1,5 +1,5 @@
 {
-  "name": "turborepo-basic-yarn",
+  "name": "lazone",
   "version": "0.0.0",
   "private": true,
   "workspaces": [
@@ -52,9 +52,5 @@
     "*.json": [
       "prettier --write"
     ]
-  },
-  "dependencies": {
-    "find-up": "^6.3.0",
-    "framer-motion": "^6.3.16"
   }
 }
