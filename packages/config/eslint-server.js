@@ -31,6 +31,11 @@ module.exports = {
       },
     },
   },
+  rules: {
+    'no-console': 'off',
+    'no-await-in-loop': 'off',
+    'no-promise-executor-return': 'off',
+  },
   overrides: [
     {
       env: {
@@ -42,7 +47,7 @@ module.exports = {
         'import/no-extraneous-dependencies': [
           'off',
           { devDependencies: ['**/?(*.)+(spec|test).[jt]s'] },
-        ],
+        ]
       },
     },
   ],
