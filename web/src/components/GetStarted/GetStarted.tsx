@@ -1,6 +1,7 @@
 import React from "react";
 import { UnorderedList, ListItem, Box, Grid, Button, Center, Select } from "@chakra-ui/react";
 import { StepType } from '../../types/GameStep'
+import toast from "react-hot-toast";
 
 /**
  * Starter game screen component 
@@ -45,8 +46,10 @@ function GetStarted({ setStep, setLevel, level, onStarted, isLoading }: GetStart
                         isLoading={isLoading}
                         colorScheme="blue"
                         onClick={() => onStarted({ roundType: level }).then((round: any) => {
-                            if (round.data.createRound.publicId)
+                            if (round?.data?.createRound?.publicId) {
                                 setStep(StepType.Playing)
+                                toast.error("An error has occured")
+                            }
                         })}
                         style={{ justifyContent: "center", alignItems: "center", alignSelf: "center" }}
                     >
