@@ -6,7 +6,7 @@ import MovieCard from "../MovieCard/MovieCard";
 import QuizCard from "../QuizCard/QuizCard";
 import { StepType } from "../../types/GameStep";
 import { useCheckQuizMutation, useCreateQuizMutation } from '../../generated/graphql';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import toast, { Toaster } from "react-hot-toast";
 import RenderTime from '../CountDown/CountDown';
 import { Round } from "../../generated/graphql"
@@ -21,12 +21,35 @@ type PlayingType = {
     round: Round;
     numberQuiz: number;
 }
+function useTime(timer: number) {
+    const [time, setTime] = useState(0)
+    const timeOut = setTimeout(
+        () => {
+            setTime((prev: number) => prev + 1)
+        }, 1000
+    )
+    if (time > timer) {
+        clearTimeout(timeOut)
+        return -1
+    }
+
+    return time / 2
+}
 export default function PlayingComponent({ setStep, round, setNumberQuiz, numberQuiz }: PlayingType) {
     const [quiz, createQuiz] = useCreateQuizMutation()
     const [check, checkQuiz] = useCheckQuizMutation()
+    const timer = useTime(300)
+    useEffect(
+        () => {
+            if (timer === -1) {
+                setStep(StepType.Failed)
+                toast.error('Time out')
+            }
+        }, [timer]
+    )
 
     useEffect(() => {
-        createQuiz({ publicId: round.publicId })
+        createQuiz({ publicId: round?.publicId })
     }, [])
 
     function handleCheckResponse(response: boolean) {
@@ -37,10 +60,10 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
                         if (data.data?.checkQuiz === true) {
                             toast.success('Bravooo !')
                             setNumberQuiz((p: number) => p + 1)
-                            if (round.roundType === "20" && numberQuiz >= 20)
+                            if (round?.roundType === "20" && numberQuiz >= 20)
                                 setStep(StepType.Success)
                             else
-                                createQuiz({ publicId: round.publicId })
+                                createQuiz({ publicId: round?.publicId })
                         } else if (data.data?.checkQuiz === false) {
                             toast.error('Oopss!')
                             setStep(StepType.Failed)
@@ -109,6 +132,11 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
             />
             <Row>
                 <Col md={4} sm={0}>
+                    <div style={{ position: "fixed" }}>
+                        <Button>
+                            <h3>{timer} secondes </h3>
+                        </Button>
+                    </div>
                 </Col>
                 <Col>
                     <Center style={{}}>

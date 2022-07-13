@@ -36,6 +36,7 @@ function GetStarted({ setStep, setLevel, level, onStarted, isLoading }: GetStart
                 <UnorderedList>
                     <ListItem>Level 20: Answer 20 questions  without <br /> error, and you will be a winner</ListItem>
                     <ListItem>Level unlimited: No question limit, try <br /> to beat your record</ListItem>
+                    <ListItem>You have 300 secondes (5 minutes) </ListItem>
                 </UnorderedList>
                 <Center>
                     <Button

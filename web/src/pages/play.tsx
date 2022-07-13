@@ -10,10 +10,11 @@ import { useCreateRoundMutation } from "../generated/graphql";
 
 
 const Play: NextPage = () => {
-    const [step, setStep] = useState(StepType.Started);
+    const [step, setStep] = useState(StepType.Playing);
     const [level, setLevel] = useState("20");
     const [round, createRound] = useCreateRoundMutation()
     const [numberQuiz, setNumberQuiz] = useState(0)
+    
     switch (step) {
         case StepType.Started:
             return <GetStarted level={level} setStep={setStep} isLoading={round.fetching} setLevel={setLevel} onStarted={createRound} />

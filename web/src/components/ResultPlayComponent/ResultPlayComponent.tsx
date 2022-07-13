@@ -25,7 +25,7 @@ const ResultPlayComponent = ({ setStep, numberQuiz, round, setNumberQuiz }: { se
                     </div>
                 ) : (
                     <div style={{ textAlign: "center" }}>
-                        <h1> Oops ! Game Over </h1> <br />
+                        <h1> Oops ! End of game </h1> <br />
                         <h1> Score: {numberQuiz * 10}</h1> <br />
                         <h3>You answered {numberQuiz} questions</h3>
                     </div>
