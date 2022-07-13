@@ -1,0 +1,3 @@
+mutation CheckQuiz($score: Float!, $response: Boolean!, $publicId: String!, $checkQuizId: Float!) {
+  checkQuiz(score: $score, response: $response, publicId: $publicId, id: $checkQuizId)
+}
