@@ -6,34 +6,55 @@ import {
   Entity,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne
 } from "typeorm";
-
+import { Round } from ".";
 @ObjectType()
 @Entity()
-export class User extends BaseEntity {
+export class Quiz extends BaseEntity {
   @Field(() => Int)
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
+
+  @Field(() => Round)
+  @ManyToOne(() => Round, (round) => round.quiz)
+  round?: Round;
+
+  @Field(() => Boolean)
+  @Column()
+  adult!: boolean;
 
   @Field(() => String)
   @Column()
-  username!: string;
+  actorName!: string;
 
   @Field(() => String)
   @Column()
-  firstname!: string;
+  originalName!: string;
 
   @Field(() => String)
   @Column()
-  lastname!: string;
+  actorPicture!: string;
 
   @Field(() => String)
   @Column()
-  email!: string;
+  movieTitle!: string;
 
   @Field(() => String)
   @Column()
-  password!: string;
+  movieDescription!: string;
+
+  @Field(() => String)
+  @Column()
+  releaseDate!: string;
+
+  @Field(() => String)
+  @Column()
+  movieUrl: string;
+
+  @Field(() => Boolean)
+  @Column()
+  quizType: boolean;
 
   @Field(() => String)
   @CreateDateColumn()

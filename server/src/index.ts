@@ -3,9 +3,18 @@ import express from "express";
 import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
 
+import path from "path";
+import dotenv from "dotenv";
 import { openDBConnection } from "./utils/database";
 import config from "./constants";
 import { createSchema } from "./utils/createSchema";
+
+dotenv.config({
+  path: path.resolve(
+    __dirname,
+    `./.env.${process.env.NODE_ENV || "development"}`
+  ),
+});
 
 const main = async () => {
   let retries = Number(config.dbConnectionRetries);
@@ -19,7 +28,6 @@ const main = async () => {
       break;
     } catch (error) {
       retries -= 1;
-      console.log(error);
       console.log(`retries left: ${retries}`);
       await new Promise((res) => setTimeout(res, retryTimeout));
     }
@@ -27,7 +35,7 @@ const main = async () => {
 
   const app = express();
 
-  //set up cors with express cors middleware
+  // set up cors with express cors middleware
   app.use(
     cors({ origin: [config.frontend_url, config.studio_apollo_graphql_url] })
   );

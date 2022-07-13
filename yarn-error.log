@@ -1,0 +1,82 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\HP\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
+
+PATH: 
+  C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\Users\HP\AppData\Local\Android\Sdk\platform-tools;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\nvm;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Program Files\PuTTY\;C:\Users\HP\.windows-build-tools\python27\;C:\Users\HP\AppData\Local\Microsoft\WindowsApps;C:\Users\HP\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\PyCharm Community Edition 2022.1\bin;C:\Users\HP\AppData\Local\Android\Sdk\platform-tools;%PYTHON%;C:\Users\HP\AppData\Roaming\npm;C:\nvm;C:\Program Files\nodejs;C:\Program Files\heroku\bin
+
+Yarn version: 
+  1.22.18
+
+Node version: 
+  14.17.1
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: connect EHOSTUNREACH 104.16.19.35:443
+      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1148:16)
+
+npm manifest: 
+  {
+    "name": "lazone",
+    "version": "0.0.0",
+    "private": true,
+    "workspaces": [
+      "apps/*",
+      "packages/*"
+    ],
+    "scripts": {
+      "build": "turbo run build",
+      "dev": "turbo run dev --parallel --global-deps='.env' --force",
+      "test": "turbo run test",
+      "lint": "turbo run lint",
+      "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+      "prepare": "husky install",
+      "migrate": "typeorm migration:run",
+      "storybook": "start-storybook -p 6006",
+      "build-storybook": "build-storybook"
+    },
+    "devDependencies": {
+      "@babel/core": "^7.18.6",
+      "@storybook/addon-actions": "^6.5.9",
+      "@storybook/addon-essentials": "^6.5.9",
+      "@storybook/addon-interactions": "^6.5.9",
+      "@storybook/addon-links": "^6.5.9",
+      "@storybook/builder-webpack5": "^6.5.9",
+      "@storybook/cli": "^6.5.9",
+      "@storybook/manager-webpack5": "^6.5.9",
+      "@storybook/react": "^6.5.9",
+      "@storybook/testing-library": "^0.0.13",
+      "@testing-library/jest-dom": "^5.16.1",
+      "@testing-library/react": "^12.1.2",
+      "@testing-library/react-hooks": "^7.0.2",
+      "@testing-library/user-event": "^13.5.0",
+      "@types/jest": "^27.4.0",
+      "babel-loader": "^8.2.5",
+      "esbuild": "^0.14.10",
+      "esbuild-jest": "^0.5.0",
+      "husky": "^7.0.4",
+      "identity-obj-proxy": "^3.0.0",
+      "jest": "^27.4.7",
+      "jest-watch-typeahead": "^1.0.0",
+      "lint-staged": "^12.1.3",
+      "msw": "^0.36.3",
+      "prettier": "^2.5.1",
+      "turbo": "*"
+    },
+    "lint-staged": {
+      "apps/**/*.{js,ts,jsx,tsx}": [
+        "eslint --fix"
+      ],
+      "*.json": [
+        "prettier --write"
+      ]
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
