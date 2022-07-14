@@ -9,10 +9,10 @@ import { Round } from "../../generated/graphql";
  */
 
 type GetStartedType = {
-    setStep: (event: any) => void;
-    setLevel: (event: any) => void;
+    setStep: (e: StepType) => void;
+    setLevel: (e: string) => void;
     level: string;
-    onStarted: (event: any) => Promise<any>;
+    onStarted: (roundType: any) => Promise<any>;
     isLoading: boolean;
 }
 function GetStarted({ setStep, setLevel, level, onStarted, isLoading }: GetStartedType) {
