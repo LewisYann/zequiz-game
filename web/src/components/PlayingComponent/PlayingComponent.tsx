@@ -16,8 +16,8 @@ import { Round } from "../../generated/graphql"
  */
 
 type PlayingType = {
-    setStep: (event: any) => void;
-    setNumberQuiz: (event: any) => void;
+    setStep: (event: StepType) => void;
+    setNumberQuiz: (p: any) => void;
     round: Round;
     numberQuiz: number;
 }
