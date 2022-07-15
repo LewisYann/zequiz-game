@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 import { openDBConnection } from "./utils/database";
 import config from "./constants";
 import { createSchema } from "./utils/createSchema";
+import session from "express-session";
 
 dotenv.config({
   path: path.resolve(
@@ -28,6 +29,7 @@ const main = async () => {
       break;
     } catch (error) {
       retries -= 1;
+      console.log(error)
       console.log(`retries left: ${retries}`);
       await new Promise((res) => setTimeout(res, retryTimeout));
     }
@@ -39,6 +41,17 @@ const main = async () => {
   app.use(
     cors({ origin: [config.frontend_url, config.studio_apollo_graphql_url] })
   );
+
+  // creating 24 hours from milliseconds
+  const oneDay = 1000 * 60 * 60 * 24;
+
+  //session middleware
+  app.use(session({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized: true,
+    cookie: { maxAge: oneDay },
+    resave: false
+  }));
 
   const apolloServer = new ApolloServer({
     schema: await createSchema(),

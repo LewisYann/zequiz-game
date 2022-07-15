@@ -23,7 +23,7 @@ const config = {
 module.exports = [
   {
     name: "development",
-    type: "postgres",
+    type: "mysql",
     database: config.development.db,
     synchronize: true,
     logging: config.env === "development",

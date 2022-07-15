@@ -101,7 +101,6 @@ export class quizResolver {
                     movieUrl: `${process.env.PICTURE_URL}/${movie.poster_path}`,
                     round: round,
                     quizType: actor.quizType
-
                 }).save()
             } else if (sup > 0) {
                 const actor = await getMoviesDetails(movie.id, round?.roundType)
@@ -116,12 +115,9 @@ export class quizResolver {
                     movieUrl: `${process.env.PICTURE_URL}/${movie.poster_path}`,
                     round: round,
                     quizType: actor.quizType
-
                 }).save()
             }
         }
-
-
         return undefined
     }
 
