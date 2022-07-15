@@ -10,7 +10,7 @@ function MovieCard({ quiz }: { quiz: { createQuiz: Quiz } }) {
 
     return (
         <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-            <Image src={quiz?.createQuiz?.movieUrl} alt={quiz?.createQuiz?.movieTitle} />
+            <Image src={quiz.createQuiz.movieUrl} alt={quiz.createQuiz.movieTitle} />
 
             <Box p='6'>
                 <Box
@@ -20,7 +20,7 @@ function MovieCard({ quiz }: { quiz: { createQuiz: Quiz } }) {
                     lineHeight='tight'
                     noOfLines={1}
                 >
-                    {quiz?.createQuiz?.movieTitle}
+                    {quiz.createQuiz.movieTitle}
                 </Box>
             </Box>
         </Box>

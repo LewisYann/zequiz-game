@@ -17,7 +17,7 @@ import { Round } from "../../generated/graphql"
 
 type PlayingType = {
     setStep: (event: StepType) => void;
-    setNumberQuiz: (p: any) => void;
+    setNumberQuiz: (p: number) => void;
     round: Round;
     numberQuiz: number;
 }
@@ -49,21 +49,21 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
     )
 
     useEffect(() => {
-        createQuiz({ publicId: round?.publicId })
+        createQuiz({ publicId: round.publicId })
     }, [])
 
     function handleCheckResponse(response: boolean) {
-        if (quiz.data?.createQuiz?.id) {
+        if (!quiz.fetching && quiz.data?.createQuiz) {
             checkQuiz({ score: numberQuiz * 10, response: response, checkQuizId: quiz.data.createQuiz.id, publicId: round.publicId })
                 .then(
                     (data) => {
                         if (data.data?.checkQuiz === true) {
                             toast.success('Bravooo !')
-                            setNumberQuiz((p: number) => p + 1)
-                            if (round?.roundType === "20" && numberQuiz >= 20)
+                            setNumberQuiz(numberQuiz + 1)
+                            if (round.roundType === "20" && numberQuiz >= 20)
                                 setStep(StepType.Success)
                             else
-                                createQuiz({ publicId: round?.publicId })
+                                createQuiz({ publicId: round.publicId })
                         } else if (data.data?.checkQuiz === false) {
                             toast.error('Oopss!')
                             setStep(StepType.Failed)
@@ -159,7 +159,7 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
 
                 <Col>
                     <p>Score: {numberQuiz * 10}</p>
-                    <p>Quizzes Answered:{numberQuiz}/{round?.roundType}</p>
+                    <p>Quizzes Answered:{numberQuiz}/{round.roundType}</p>
                     <p>Quizzes Left : {round?.roundType}</p>
                 </Col>
             </Row>

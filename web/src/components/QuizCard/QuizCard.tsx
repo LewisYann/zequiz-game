@@ -13,7 +13,7 @@ import { Quiz } from '../../generated/graphql';
 const QuizCard = ({ quiz }: { quiz: { createQuiz: Quiz } }) => (
         <Stat>
             <StatLabel>Quiz</StatLabel>
-            <StatNumber>Did {quiz?.createQuiz?.originalName} play as an actor in {quiz?.createQuiz?.movieTitle} film </StatNumber>
+            <StatNumber>Did {quiz.createQuiz.originalName} play as an actor in {quiz.createQuiz.movieTitle} film </StatNumber>
         </Stat>
     )
 
