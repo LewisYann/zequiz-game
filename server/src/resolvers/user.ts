@@ -1,3 +1,4 @@
+import { validateRegister } from "../utils/validate";
 import { Arg, Ctx, Field, Mutation, ObjectType, Query, Resolver } from "type-graphql";
 import { User } from "../entities/User";
 import { AppContext, UserInput } from "../types";
@@ -23,7 +24,10 @@ class UserResponse {
 export class userResolver {
   @Mutation(() => UserResponse)
   async register(@Arg("input") input: UserInput): Promise<UserResponse> {
-    //  const user = await User.create(input).save();
+    const errors = validateRegister(input);
+    if (errors) {
+      return { errors };
+    }
     const user = await User.findAndCount({ where: [{ username: input.username }, { email: input.email }] });
 
     if (user[1] > 0) {
