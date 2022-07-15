@@ -4,7 +4,7 @@ import { Round } from "../../generated/graphql";
 import { StepType } from "../../types/GameStep";
 
 /**
- * Render resultat of round
+ * Render result of round
  */
 
 const ResultPlayComponent = ({ setStep, numberQuiz, round, setNumberQuiz }: { setNumberQuiz: (event: any) => void, setStep: (event:StepType) => void, numberQuiz: number, round: Round }) => (

@@ -55,6 +55,10 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await createSchema(),
+    context: ({ req, res }) => ({
+      req,
+      res
+    }),
   });
 
   await apolloServer.start();
