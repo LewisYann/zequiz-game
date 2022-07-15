@@ -19,7 +19,7 @@ const config = {
     port: process.env.DB_PORT || 5432,
   },
 };
-
+console.log(process.env)
 module.exports = [
   {
     name: "development",
@@ -27,11 +27,11 @@ module.exports = [
     database: config.development.db,
     synchronize: true,
     logging: config.env === "development",
-    entities: [path.join(__dirname, "/dist/entities/**/*.js")],
-    migrations: [path.join(__dirname, "/dist/migrations/**/*.js")],
+    entities: [path.join(__dirname, "/src/entities/**/*.ts")],
+    migrations: [path.join(__dirname, "/src/migrations/**/*.ts")],
     cli: {
-      entitiesDir: "dist/entities",
-      migrationsDir: "dist/migrations",
+      entitiesDir: "src/entities",
+      migrationsDir: "src/migrations",
     },
     host: config.development.host,
     port: Number(config.development.port),

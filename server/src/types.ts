@@ -1,6 +1,18 @@
 import { InputType, Field } from "type-graphql";
 import { Round } from "./entities";
+import { Request, Response } from "express";
 
+@InputType()
+export class UserLoginInput {
+  @Field(() => String)
+  username: string;
+
+  @Field(() => String)
+  email: string;
+
+  @Field(() => String)
+  password!: string;
+}
 @InputType()
 export class UserInput {
   @Field(() => String)
@@ -55,3 +67,15 @@ export class QuizInput {
   updatedAt: Date;
 }
 
+declare global {
+  namespace Express {
+    interface Session {
+      user?: Number
+    }
+  }
+}
+
+export type AppContext = {
+  req: Request & { session: Express.Session };
+  res: Response;
+};

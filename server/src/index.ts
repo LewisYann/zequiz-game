@@ -9,6 +9,8 @@ import { openDBConnection } from "./utils/database";
 import config from "./constants";
 import { createSchema } from "./utils/createSchema";
 import session from "express-session";
+import cookieParser from "cookie-parser"
+
 
 dotenv.config({
   path: path.resolve(
@@ -36,22 +38,36 @@ const main = async () => {
   }
 
   const app = express();
-
-  // set up cors with express cors middleware
-  app.use(
-    cors({ origin: [config.frontend_url, config.studio_apollo_graphql_url] })
-  );
-
+  app.use(cookieParser());
   // creating 24 hours from milliseconds
   const oneDay = 1000 * 60 * 60 * 24;
-
+  app.use(
+    cors({
+      origin: [config.frontend_url, config.studio_apollo_graphql_url],
+      credentials: true, // this allows to send back (to client) cookies
+    })
+  );
+  app.set("trust proxy", 1)
   //session middleware
   app.use(session({
-    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-    saveUninitialized: true,
-    cookie: { maxAge: oneDay },
+    name: "testLs",
+    secret: "ddddddd",
+    saveUninitialized: false,
+    cookie: {
+      maxAge: oneDay,
+      secure: true,
+      sameSite: "lax",
+      domain:"http://localhost:3000",
+      httpOnly:false
+    },
     resave: false
   }));
+
+  // set up cors with express cors middleware
+
+
+
+
 
   const apolloServer = new ApolloServer({
     schema: await createSchema(),
