@@ -1,5 +1,5 @@
 import { InputType, Field, ObjectType } from "type-graphql";
-import { Round, User } from "./entities";
+import { Quiz, Round, User } from "./entities";
 import { Request, Response } from "express";
 
 @InputType()
@@ -67,6 +67,22 @@ export class QuizInput {
   updatedAt: Date;
 }
 
+@InputType()
+export class QuizCheckInput {
+
+  @Field(() => String)
+  id: Number;
+
+  @Field(() => String)
+  publicId: String;
+
+  @Field(() => Boolean)
+  response: Boolean;
+
+  @Field(() => Number)
+  score: Number;
+}
+
 declare global {
   namespace Express {
     interface Session {
@@ -94,6 +110,15 @@ export class roundResponse {
 
   @Field(() => Round, { nullable: true })
   round?: Round;
+}
+
+@ObjectType()
+export class QuizResponse {
+  @Field(() => [FieldError], { nullable: true })
+  errors?: FieldError[];
+
+  @Field(() => Quiz, { nullable: true })
+  quiz?: Quiz;
 }
 
 

@@ -1,4 +1,4 @@
-import { UserInput } from "src/types";
+import { UserInput, QuizCheckInput } from "../types";
 
 export const validateRegister = (options: UserInput) => {
     if (!options.email.includes("@")) {
@@ -55,3 +55,41 @@ export const validateRegister = (options: UserInput) => {
 
     return null;
 };
+
+export const validateCheckQuiz = (options: QuizCheckInput) => {
+
+    if (!options.id) {
+        return [
+            {
+                field: "id",
+                message: "Missing id parameter",
+            },
+        ];
+    }
+    if (!options.publicId) {
+        return [
+            {
+                field: "publicId",
+                message: "Missing id parameters",
+            },
+        ];
+    }
+
+    if (typeof options.response == "undefined") {
+        return [
+            {
+                field: "response",
+                message: "Missing response parameter",
+            },
+        ];
+    }
+    else if (typeof options.response !== "boolean") {
+        return [
+            {
+                field: "response",
+                message: "Response parameter must be Boolean value",
+            },
+        ];
+    }
+    return null
+}
