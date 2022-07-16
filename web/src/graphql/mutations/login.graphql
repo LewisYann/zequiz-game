@@ -1,10 +1,16 @@
 mutation Login($password: String!, $username: String!) {
-  login(username: $username,password: $password) {
-    username
-    firstname
-    lastname
-    email
-    createdAt
-    updatedAt
+  login(password: $password, username: $username) {
+    errors {
+      field
+      message
+    }
+    user {
+      username
+      firstname
+      lastname
+      email
+      createdAt
+      updatedAt
+    }
   }
 }

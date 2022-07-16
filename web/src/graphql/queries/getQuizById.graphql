@@ -1,19 +1,22 @@
 query GetQuizById($getQuizByIdId: String!) {
   getQuizById(id: $getQuizByIdId) {
-    id
-    round {
-      publicId
+    errors {
+      field
+      message
     }
-    adult
-    actorName
-    originalName
-    actorPicture
-    movieTitle
-    movieDescription
-    releaseDate
-    movieUrl
-    quizType
-    createdAt
-    updatedAt
+    quiz {
+      id
+      adult
+      actorName
+      originalName
+      actorPicture
+      movieTitle
+      movieDescription
+      releaseDate
+      movieUrl
+      quizType
+      createdAt
+      updatedAt
+    }
   }
 }
