@@ -56,8 +56,8 @@ function GetStarted({ setStep, setLevel, level, onStarted, isLoading }: GetStart
                             } else {
                                 try {
 
-                                    onStarted({ roundType: level }).then((round: { data: { createRound: Round } }) => {
-                                        if (round?.data?.createRound?.publicId) {
+                                    onStarted({ roundType: level }).then((round: { data: { createRound: { round: Round } } }) => {
+                                        if (round.data.createRound && round.data.createRound.round.publicId) {
                                             setStep(StepType.Playing)
                                             toast.success("Starting game")
                                         }

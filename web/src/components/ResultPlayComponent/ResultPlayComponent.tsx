@@ -7,7 +7,8 @@ import { StepType } from "../../types/GameStep";
  * Render result of round
  */
 
-const ResultPlayComponent = ({ setStep, numberQuiz, round, setNumberQuiz }: { setNumberQuiz: (event: any) => void, setStep: (event:StepType) => void, numberQuiz: number, round: Round }) => (
+const ResultPlayComponent = ({ setStep, numberQuiz, round, setNumberQuiz }: { setNumberQuiz: (event: any) => void, setStep: (event: StepType) => void, numberQuiz: number, round: { round: Round } }) => (
+    
     <Grid
         alignItems="center"
         h="100vh"
@@ -17,7 +18,7 @@ const ResultPlayComponent = ({ setStep, numberQuiz, round, setNumberQuiz }: { se
     >
         <Box>
             {
-                numberQuiz >= 20 && round.roundType === "20" ? (
+                numberQuiz >= 20 && round.round.roundType === "20" ? (
                     <div style={{ textAlign: "center" }}>
                         <h1> Congratulationnn !!! </h1> <br />
                         <h1> Score: {numberQuiz * 10}</h1> <br />

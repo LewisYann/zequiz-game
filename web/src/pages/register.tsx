@@ -30,9 +30,9 @@ const Register: NextPage<IRegisterProps> = () => {
           try {
             const response = await register({ input: values });
             const user = response.data?.register;
-            if (user && !response.error) {
+            if (user?.errors == null && !response.error) {
               toast.success('Successfully, redirecting...')
-              router.push(`user/${user.username}`);
+              router.push(`user/${user?.user?.username}`);
             }
             else {
               toast.error("Please, complete all field and try again")
