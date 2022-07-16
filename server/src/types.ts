@@ -1,5 +1,5 @@
-import { InputType, Field } from "type-graphql";
-import { Round } from "./entities";
+import { InputType, Field, ObjectType } from "type-graphql";
+import { Round, User } from "./entities";
 import { Request, Response } from "express";
 
 @InputType()
@@ -79,3 +79,29 @@ export type AppContext = {
   req: Request & { session: Express.Session };
   res: Response;
 };
+
+@ObjectType()
+export class FieldError {
+  @Field()
+  field: string;
+  @Field()
+  message: string;
+}
+@ObjectType()
+export class roundResponse {
+  @Field(() => [FieldError], { nullable: true })
+  errors?: FieldError[];
+
+  @Field(() => Round, { nullable: true })
+  round?: Round;
+}
+
+
+@ObjectType()
+export class UserResponse {
+  @Field(() => [FieldError], { nullable: true })
+  errors?: FieldError[];
+
+  @Field(() => User, { nullable: true })
+  user?: User;
+}
