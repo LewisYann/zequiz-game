@@ -30,7 +30,8 @@ const Login: NextPage<IRegisterProps> = () => {
               router.push(`user/${user?.user?.username}`);
             }
             else {
-              toast.error("Please check your credential")
+              const message = user?.errors[0].message.toString()
+              toast.error(message || "An error has occured")
             }
           } catch {
             toast.error("Something went wrong, please try again")

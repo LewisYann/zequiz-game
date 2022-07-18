@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { UnorderedList, ListItem, Box, Grid, Button, Center, Select, Modal, ModalBody, ModalContent, ModalOverlay, ModalHeader, ModalFooter, ModalCloseButton } from "@chakra-ui/react";
+import { UnorderedList, ListItem, Box, Grid, Button, Center, Select, Modal, ModalBody, ModalContent, ModalOverlay, ModalHeader, ModalFooter, ModalCloseButton, Heading, Link } from "@chakra-ui/react";
 import { StepType } from '../../types/GameStep'
 import toast, { Toaster } from "react-hot-toast";
 import { Round } from "../../generated/graphql";
@@ -20,7 +20,6 @@ function GetStarted({ setStep, setLevel, level, onStarted, isLoading }: GetStart
     return (
         <Grid
             alignItems="center"
-            h="100vh"
             justifyContent="center"
             fontWeight="bold"
             fontSize="2xl"
@@ -30,7 +29,11 @@ function GetStarted({ setStep, setLevel, level, onStarted, isLoading }: GetStart
                 position="top-center"
                 reverseOrder={false}
             />
+
             <Box>
+                <Heading as="h2" fontSize="4xl" fontWeight="bold">
+                    <Link color="blue.600" href="/">Ze quiz</Link>
+                </Heading>
                 <h1>Game Rules</h1>
                 <br />
                 <Select onChange={(e) => setLevel(e.target.value)} >
