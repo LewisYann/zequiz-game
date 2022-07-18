@@ -2,6 +2,7 @@ import { validateRegister } from "../utils/validate";
 import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { User } from "../entities/User";
 import { AppContext, UserInput, UserResponse } from "../types";
+import argon2 from "argon2";
 
 
 
@@ -25,6 +26,7 @@ export class userResolver {
         ]
       }
     }
+    input.password = await argon2.hash(input.password);
     const userSaving = await User.create(input).save();
 
     return { user: userSaving }
@@ -34,11 +36,9 @@ export class userResolver {
   @Query(() => UserResponse)
   async getByUsername(
     @Arg("username") username: string,
-    @Ctx() { req }: AppContext
+    @Ctx() { }: AppContext
   ): Promise<UserResponse> {
-    console.log(
-      "resa", req.session
-    )
+
     const user = await User.findOne({ where: { username } });
 
     if (user === undefined) {
@@ -46,7 +46,7 @@ export class userResolver {
         errors: [
           {
             field: "username",
-            message: "this user does not found"
+            message: "This user doesn't found"
           }
         ]
       }
@@ -57,25 +57,35 @@ export class userResolver {
 
   @Mutation(() => UserResponse)
   async login(
-    @Arg("username") username: String,
-    @Arg("password") password: String,
+    @Arg("username") username: string,
+    @Arg("password") password: string,
     @Ctx() { req }: AppContext
   ): Promise<UserResponse> {
-    const user = await User.findOne({ where: { username, password } });
+    const user = await User.findOne({ where: { username } });
 
-    if (user === undefined) {
+    if (!user) {
       return {
         errors: [
           {
-            field: "username and password",
-            message: "check your username and password"
+            field: "username",
+            message: "This username doesn't exist"
           }
         ]
       }
     }
+    const checkPassword = await argon2.verify(user.password, password);
+    if (!checkPassword) {
+      return {
+        errors: [
+          {
+            field: "password",
+            message: "Incorrect password",
+          },
+        ],
+      };
+    }
+    req.session.user = user.id
 
-    req.session.user = 2
-    req.session.save()
     return { user };
   }
 }

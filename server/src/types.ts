@@ -1,6 +1,8 @@
 import { InputType, Field, ObjectType } from "type-graphql";
 import { Quiz, Round, User } from "./entities";
 import { Request, Response } from "express";
+import { Redis } from "ioredis";
+import { Session, SessionData } from "express-session";
 
 @InputType()
 export class UserLoginInput {
@@ -83,17 +85,13 @@ export class QuizCheckInput {
   score: Number;
 }
 
-declare global {
-  namespace Express {
-    interface Session {
-      user?: Number
-    }
-  }
-}
 
 export type AppContext = {
-  req: Request & { session: Express.Session };
+  req: Request & {
+    session: Session & Partial<SessionData> & { user: number };
+  };
   res: Response;
+  redis: Redis
 };
 
 @ObjectType()

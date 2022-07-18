@@ -9,7 +9,9 @@ import { openDBConnection } from "./utils/database";
 import config from "./constants";
 import { createSchema } from "./utils/createSchema";
 import session from "express-session";
-import cookieParser from "cookie-parser"
+import connectRedis from "connect-redis";
+import Redis from "ioredis";
+import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 
 
 dotenv.config({
@@ -38,43 +40,56 @@ const main = async () => {
   }
 
   const app = express();
-  app.use(cookieParser());
   // creating 24 hours from milliseconds
-  const oneDay = 1000 * 60 * 60 * 24;
+  //app.use(cookieParser("restxf"))
+  const RedisStore = connectRedis(session);
+  const redis = new Redis("127.0.0.1:6379");
+  app.set("trust proxy", 1);
+
+
+  // set up cors with express cors middleware
   app.use(
     cors({
       origin: [config.frontend_url, config.studio_apollo_graphql_url],
       credentials: true, // this allows to send back (to client) cookies
     })
   );
-  app.set("trust proxy", 1)
   //session middleware
-  app.use(session({
-    name: "testLs",
-    secret: "ddddddd",
-    saveUninitialized: false,
-    cookie: {
-      maxAge: oneDay,
-      secure: true,
-      sameSite: "lax",
-      domain:"http://localhost:3000",
-      httpOnly:false
-    },
-    resave: false
-  }));
+  const oneDay = 1000 * 60 * 60 * 24;
 
-  // set up cors with express cors middleware
-
-
-
+  app.use(
+    session({
+      name: 'test',
+      store: new RedisStore({
+        client: redis,
+        disableTouch: true
+      }),
+      cookie: {
+        sameSite: "lax",
+        httpOnly: true,
+        maxAge: oneDay,
+      },
+      secret: "keydfboarddfcat",
+      saveUninitialized: false,
+      resave: false
+    })
+  );
 
 
   const apolloServer = new ApolloServer({
     schema: await createSchema(),
     context: ({ req, res }) => ({
       req,
-      res
+      res,
+      redis
     }),
+    plugins: [
+      ApolloServerPluginLandingPageGraphQLPlayground({
+        settings: {
+          // "request.credentials":"include"
+        }
+      }),
+    ],
   });
 
   await apolloServer.start();
