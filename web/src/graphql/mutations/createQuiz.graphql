@@ -1,22 +1,23 @@
+ 
+
 mutation CreateQuiz($publicId: String!) {
   createQuiz(publicId: $publicId) {
-    id
-    round {
-      publicId
-      updatedAt
-      score
-      roundType
+    errors {
+      field
+      message
     }
-    adult
-    actorName
-    originalName
-    actorPicture
-    movieTitle
-    movieDescription
-    releaseDate
-    movieUrl
-    quizType
-    createdAt
-    updatedAt
+    quiz {
+      id
+      adult
+      actorName
+      originalName
+      actorPicture
+      movieTitle
+      movieDescription
+      releaseDate
+      movieUrl
+      createdAt
+      updatedAt
+    }
   }
 }

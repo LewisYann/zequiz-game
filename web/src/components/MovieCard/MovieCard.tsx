@@ -1,29 +1,30 @@
 import React from "react";
-import { Box, Image } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { Quiz } from "../../generated/graphql"
+import Card from 'react-bootstrap/Card';
 
 /**
  * Card component for display Movie info
  */
 
-function MovieCard({ quiz }: { quiz: { createQuiz: Quiz } }) {
-
+function MovieCard({ quiz }: { quiz: { createQuiz: { quiz: Quiz } } }) {
+    if (!quiz) {
+        return (
+            <Flex alignItems="center" h="100vh" justifyContent="center">
+                loading...
+            </Flex>
+        );
+    }
     return (
-        <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-            <Image src={quiz?.createQuiz?.movieUrl} alt={quiz?.createQuiz?.movieTitle} />
-
-            <Box p='6'>
-                <Box
-                    mt='1'
-                    fontWeight='semibold'
-                    as='h4'
-                    lineHeight='tight'
-                    noOfLines={1}
-                >
-                    {quiz?.createQuiz?.movieTitle}
-                </Box>
-            </Box>
-        </Box>
+        <Card style={{ margin: 10 }}>
+            <Card.Img variant="top" style={{maxHeight:320}} src={quiz.createQuiz.quiz.movieUrl} alt={quiz.createQuiz.quiz.movieTitle} />
+            <Card.Body>
+                <Card.Title>Movie</Card.Title>
+                <Card.Text>
+                    {quiz.createQuiz.quiz.movieTitle}
+                </Card.Text>
+            </Card.Body>
+        </Card>
     )
 }
 

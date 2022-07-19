@@ -8,6 +8,11 @@ import dotenv from "dotenv";
 import { openDBConnection } from "./utils/database";
 import config from "./constants";
 import { createSchema } from "./utils/createSchema";
+import session from "express-session";
+import connectRedis from "connect-redis";
+import Redis from "ioredis";
+import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
+
 
 dotenv.config({
   path: path.resolve(
@@ -28,20 +33,63 @@ const main = async () => {
       break;
     } catch (error) {
       retries -= 1;
+      console.log(error)
       console.log(`retries left: ${retries}`);
       await new Promise((res) => setTimeout(res, retryTimeout));
     }
   }
 
   const app = express();
+  // creating 24 hours from milliseconds
+  //app.use(cookieParser("restxf"))
+  const RedisStore = connectRedis(session);
+  const redis = new Redis("127.0.0.1:6379");
+  app.set("trust proxy", 1);
+
 
   // set up cors with express cors middleware
   app.use(
-    cors({ origin: [config.frontend_url, config.studio_apollo_graphql_url] })
+    cors({
+      origin: [config.frontend_url, config.studio_apollo_graphql_url],
+      credentials: true, // this allows to send back (to client) cookies
+    })
   );
+  //session middleware
+  const oneDay = 1000 * 60 * 60 * 24;
+
+  app.use(
+    session({
+      name: 'test',
+      store: new RedisStore({
+        client: redis,
+        disableTouch: true
+      }),
+      cookie: {
+        sameSite: "lax",
+        httpOnly: true,
+        maxAge: oneDay,
+      },
+      secret: "keydfboarddfcat",
+      saveUninitialized: false,
+      resave: false
+    })
+  );
+
 
   const apolloServer = new ApolloServer({
     schema: await createSchema(),
+    context: ({ req, res }) => ({
+      req,
+      res,
+      redis
+    }),
+    plugins: [
+      ApolloServerPluginLandingPageGraphQLPlayground({
+        settings: {
+          // "request.credentials":"include"
+        }
+      }),
+    ],
   });
 
   await apolloServer.start();

@@ -16,9 +16,9 @@ import { Round } from "../../generated/graphql"
  */
 
 type PlayingType = {
-    setStep: (event: any) => void;
-    setNumberQuiz: (event: any) => void;
-    round: Round;
+    setStep: (event: StepType) => void;
+    setNumberQuiz: (p: number) => void;
+    round: { round: Round };
     numberQuiz: number;
 }
 function useTime(timer: number) {
@@ -49,22 +49,22 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
     )
 
     useEffect(() => {
-        createQuiz({ publicId: round?.publicId })
+        createQuiz({ publicId: round.round.publicId })
     }, [])
 
     function handleCheckResponse(response: boolean) {
-        if (quiz.data?.createQuiz?.id) {
-            checkQuiz({ score: numberQuiz * 10, response: response, checkQuizId: quiz.data.createQuiz.id, publicId: round.publicId })
+        if (!quiz.fetching && quiz.data?.createQuiz.quiz) {
+            checkQuiz({ score: numberQuiz * 10, response: response, checkQuizId: quiz.data.createQuiz.quiz.id, publicId: round.round.publicId })
                 .then(
                     (data) => {
-                        if (data.data?.checkQuiz === true) {
+                        if (data.data && data.data.checkQuiz === true) {
                             toast.success('Bravooo !')
-                            setNumberQuiz((p: number) => p + 1)
-                            if (round?.roundType === "20" && numberQuiz >= 20)
+                            setNumberQuiz(numberQuiz + 1)
+                            if (round.round.roundType === "20" && numberQuiz >= 20)
                                 setStep(StepType.Success)
                             else
-                                createQuiz({ publicId: round?.publicId })
-                        } else if (data.data?.checkQuiz === false) {
+                                createQuiz({ publicId: round.round.publicId })
+                        } else if (data.data && data.data.checkQuiz === false) {
                             toast.error('Oopss!')
                             setStep(StepType.Failed)
                         }
@@ -103,18 +103,18 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
 
             <Grid
                 alignItems="center"
-                h="100vh"
+                h="md"
                 justifyContent="center"
                 fontWeight="bold"
                 fontSize="5xl"
             >
-                An error has occurred, plean try again
+                <p> An error has occurred, plean try again </p>
                 <Center>
                     <Button
                         type="submit"
                         mt={4}
                         colorScheme="blue"
-                        onClick={() => createQuiz({ publicId: round.publicId })}
+                        onClick={() => createQuiz({ publicId: round.round.publicId })}
                         style={{ justifyContent: "center", alignItems: "center", alignSelf: "center" }}
                     >
                         Try again
@@ -126,22 +126,18 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
     }
     return (
         <Container style={{ paddingTop: 30 }} >
-            <Toaster
-                position="top-center"
-                reverseOrder={false}
-            />
             <Row>
-                <Col md={4} sm={0}>
-                    <div style={{ position: "fixed" }}>
+                <Col md={3} sm={0}>
+                    <div style={{ position: "fixed", zIndex: 999 }}>
                         <Button>
                             <h3>{timer} secondes </h3>
                         </Button>
                     </div>
                 </Col>
-                <Col>
+                <Col md={4} sm={0}>
                     <Center style={{}}>
                         <CountdownCircleTimer
-                            size={150}
+                            size={100}
                             isPlaying
 
                             duration={60}
@@ -157,21 +153,21 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
                     </Center>
                 </Col>
 
-                <Col>
-                    <p>Score: {numberQuiz * 10}</p>
-                    <p>Quizzes Answered:{numberQuiz}/{round?.roundType}</p>
-                    <p>Quizzes Left : {round?.roundType}</p>
+                <Col md={3} sm={0} style={{ marginBottom: 10 }}>
+                    <p><b>Score:</b> {numberQuiz * 10}</p>
+                    <p><b>Quizzes Answered: </b>{numberQuiz}/{round.round.roundType}</p>
+                    <p><b>Quizzes Left : </b> {round.round.roundType}</p>
                 </Col>
             </Row>
             <Row >
-                <Col md={6}>
+                <Col >
                     <Center>
                         {/*@ts-ignore*/}
                         <ActorCard quiz={quiz.data} />
                     </Center>
 
                 </Col>
-                <Col md={6}>
+                <Col>
                     <Center>
                         {/*@ts-ignore*/}
                         <MovieCard quiz={quiz.data} />
@@ -188,7 +184,7 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
                 </Center>
 
             </Row>
-            <Row>
+            <Row style={{ paddingBottom: 10 }} >
                 <Center>
                     {
                         check.fetching ? (

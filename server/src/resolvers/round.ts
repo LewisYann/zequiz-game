@@ -1,46 +1,79 @@
-import { ApolloError } from "apollo-server-express";
+import { roundResponse } from "../types";
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { Round } from "../entities";
 
 
+
 @Resolver()
 export class roundResolver {
-    @Mutation(() => Round)
+    @Mutation(() => roundResponse)
     async createRound(
         @Arg("roundType") roundType: string,
-    ): Promise<Round | undefined> {
-        try {
-            const round = await Round.create({ score: 0, roundType: roundType }).save();
-            return Round.findOne(round.publicId, { relations: ['quiz'] })
+    ): Promise<roundResponse> {
+        if (roundType.length < 2) {
+            return {
+                errors: [
+                    {
+                        field: "roundType",
+                        message: "invalide roundType"
+                    }
+                ]
+            }
         }
-        catch {
-            throw new ApolloError('Cannot create a round, please try later', 'ERROR_CREATE_ROUND');
+        const round = await Round.create({ score: 0, roundType: roundType }).save();
+
+        if (!round) {
+            return {
+                errors: [
+                    {
+                        field: " Create create error",
+                        message: "Unable to create an round now, please try again "
+                    }
+                ]
+            }
         }
+        return { round }
     }
 
-    @Query(() => Round, { nullable: true })
+    @Query(() => roundResponse)
     async getRoundById(
         @Arg("publicId") publicId: string,
-    ): Promise<Round | undefined> {
-        return Round.findOneOrFail(publicId, { relations: ['quiz'] });
+    ): Promise<roundResponse> {
+        const round = await Round.findOne(publicId, { relations: ['quiz'] });
+
+        if (!round) {
+            return {
+                errors: [
+                    {
+                        field: "publicId",
+                        message: "This round cannot be found"
+                    }
+                ]
+            }
+        }
+        return { round }
 
     }
 
-    @Mutation(() => Round)
+    @Mutation(() => roundResponse)
     async updateScore(
         @Arg("publicId") publicId: string,
         @Arg("score") score: number
-    ): Promise<Round | undefined> {
+    ): Promise<roundResponse> {
 
-        const round = await Round.findOneOrFail({ where: { publicId: publicId } })
-        try {
-
-            await Round.update(publicId, { score: round.score + score })
-            return round
-
-        } catch {
-            throw new ApolloError('Cannot update this round, please try later', 'ERROR_UPDATE_ROUND');
-
+        const round = await Round.findOne({ where: { publicId: publicId } })
+        if (!round) {
+            return {
+                errors: [
+                    {
+                        field: "publicId",
+                        message: "This round cannot be found"
+                    }
+                ]
+            }
         }
+
+        await Round.update(publicId, { score: round.score + score })
+        return { round: round }
     }
 }

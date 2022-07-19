@@ -1,9 +1,15 @@
 mutation CreateRound($roundType: String!) {
   createRound(roundType: $roundType) {
-    publicId
-    score
-    roundType
-    createdAt
-    updatedAt
+    errors {
+      field
+      message
+    }
+    round {
+      publicId
+      score
+      roundType
+      createdAt
+      updatedAt
+    }
   }
 }

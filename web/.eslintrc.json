@@ -1,3 +1,18 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    // react
+    "react/react-in-jsx-scope": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "spaced-comment": "off",
+    "no-unescaped-entities": "off",
+    "react/no-unescaped-entities": "off",
+    "import/order": "off",
+    "import/no-duplicates": "off",
+    "import/prefer-default-export": "off",
+    "no-lone-blocks": "off",
+    "no-else-return": "off",
+    "func-names": "off",
+    "object-shorthand": "off"
+  }
 }

@@ -1,9 +1,16 @@
 query GetByUsername($username: String!) {
-  getByUsername(username: $username) {
-    id
-    username
-    email
-    createdAt
-    updatedAt
+ getByUsername(username: $username) {
+    errors {
+      field
+      message
+    }
+    user {
+      username
+      firstname
+      lastname
+      email
+      createdAt
+      updatedAt
+    }
   }
 }

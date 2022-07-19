@@ -11,7 +11,7 @@ import { useCreateRoundMutation } from "../generated/graphql";
 
 const Play: NextPage = () => {
     const [step, setStep] = useState(StepType.Started);
-    const [level, setLevel] = useState("20");
+    const [level, setLevel] = useState("");
     const [round, createRound] = useCreateRoundMutation()
     const [numberQuiz, setNumberQuiz] = useState(0)
 

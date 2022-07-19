@@ -19,7 +19,7 @@ const config = {
     port: process.env.DB_PORT || 5432,
   },
 };
-
+console.log(process.env)
 module.exports = [
   {
     name: "development",

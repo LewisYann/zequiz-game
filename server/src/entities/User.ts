@@ -16,7 +16,9 @@ export class User extends BaseEntity {
   id!: number;
 
   @Field(() => String)
-  @Column()
+  @Column(
+    { unique: true }
+  )
   username!: string;
 
   @Field(() => String)
@@ -28,7 +30,9 @@ export class User extends BaseEntity {
   lastname!: string;
 
   @Field(() => String)
-  @Column()
+  @Column(
+    { unique: true }
+  )
   email!: string;
 
   @Field(() => String)
