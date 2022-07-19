@@ -42,7 +42,7 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
     useEffect(
         () => {
             if (timer === -1) {
-                // setStep(StepType.Failed)
+                setStep(StepType.Failed)
                 toast.error('Time out')
             }
         }, [timer]
@@ -108,7 +108,7 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
                 fontWeight="bold"
                 fontSize="5xl"
             >
-                <p > An error has occurred, plean try again </p>
+                <p> An error has occurred, plean try again </p>
                 <Center>
                     <Button
                         type="submit"
@@ -128,7 +128,7 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
         <Container style={{ paddingTop: 30 }} >
             <Row>
                 <Col md={3} sm={0}>
-                    <div style={{ position: "fixed", zIndex:999 }}>
+                    <div style={{ position: "fixed", zIndex: 999 }}>
                         <Button>
                             <h3>{timer} secondes </h3>
                         </Button>
@@ -145,7 +145,7 @@ export default function PlayingComponent({ setStep, round, setNumberQuiz, number
                             colorsTime={[7, 5, 2, 0]}
                             onComplete={() => {
                                 toast('Time out')
-                                // setStep(StepType.Failed)
+                                setStep(StepType.Failed)
                             }}
                         >
                             {RenderTime}
