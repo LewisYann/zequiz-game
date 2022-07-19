@@ -20,7 +20,7 @@ export class userResolver {
       return {
         errors: [
           {
-            field: "Username, Mail",
+            field: "UsernameOrMail",
             message: "This username and mail is already taken"
           }
         ]

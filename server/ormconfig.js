@@ -23,15 +23,15 @@ console.log(process.env)
 module.exports = [
   {
     name: "development",
-    type: "mysql",
+    type: "postgres",
     database: config.development.db,
     synchronize: true,
     logging: config.env === "development",
-    entities: [path.join(__dirname, "/src/entities/**/*.ts")],
-    migrations: [path.join(__dirname, "/src/migrations/**/*.ts")],
+    entities: [path.join(__dirname, "/dist/entities/**/*.js")],
+    migrations: [path.join(__dirname, "/dist/migrations/**/*.js")],
     cli: {
-      entitiesDir: "src/entities",
-      migrationsDir: "src/migrations",
+      entitiesDir: "dist/entities",
+      migrationsDir: "dist/migrations",
     },
     host: config.development.host,
     port: Number(config.development.port),
