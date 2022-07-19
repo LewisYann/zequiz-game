@@ -12,6 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         position="top-center"
         reverseOrder={false}
       />
+      {/*ts-ignore*/}
       <Component {...pageProps} />
     </ChakraProvider>
   );
