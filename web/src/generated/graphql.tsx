@@ -168,7 +168,7 @@ export type CreateQuizMutationVariables = Exact<{
 }>;
 
 
-export type CreateQuizMutation = { __typename?: 'Mutation', createQuiz: { __typename?: 'QuizResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, quiz?: { __typename?: 'Quiz', id: number, adult: boolean, actorName: string, originalName: string, actorPicture: string, movieTitle: string, movieDescription: string, releaseDate: string, movieUrl: string, quizType: boolean, createdAt: string, updatedAt: string } | null } };
+export type CreateQuizMutation = { __typename?: 'Mutation', createQuiz: { __typename?: 'QuizResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, quiz?: { __typename?: 'Quiz', id: number, adult: boolean, actorName: string, originalName: string, actorPicture: string, movieTitle: string, movieDescription: string, releaseDate: string, movieUrl: string, createdAt: string, updatedAt: string } | null } };
 
 export type CreateRoundMutationVariables = Exact<{
   roundType: Scalars['String'];
@@ -253,7 +253,6 @@ export const CreateQuizDocument = gql`
       movieDescription
       releaseDate
       movieUrl
-      quizType
       createdAt
       updatedAt
     }

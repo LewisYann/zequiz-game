@@ -1,6 +1,7 @@
 import React from "react";
-import { Box, Flex, Image } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { Quiz } from "../../generated/graphql"
+import Card from 'react-bootstrap/Card';
 
 /**
  * Card component for display Movie info
@@ -15,21 +16,15 @@ function MovieCard({ quiz }: { quiz: { createQuiz: { quiz: Quiz } } }) {
         );
     }
     return (
-        <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-            <Image src={quiz.createQuiz.quiz.movieUrl} alt={quiz.createQuiz.quiz.movieTitle} />
-
-            <Box p='6'>
-                <Box
-                    mt='1'
-                    fontWeight='semibold'
-                    as='h4'
-                    lineHeight='tight'
-                    noOfLines={1}
-                >
+        <Card style={{ margin: 10 }}>
+            <Card.Img variant="top" style={{maxHeight:320}} src={quiz.createQuiz.quiz.movieUrl} alt={quiz.createQuiz.quiz.movieTitle} />
+            <Card.Body>
+                <Card.Title>Movie</Card.Title>
+                <Card.Text>
                     {quiz.createQuiz.quiz.movieTitle}
-                </Box>
-            </Box>
-        </Box>
+                </Card.Text>
+            </Card.Body>
+        </Card>
     )
 }
 

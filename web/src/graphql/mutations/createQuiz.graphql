@@ -16,7 +16,6 @@ mutation CreateQuiz($publicId: String!) {
       movieDescription
       releaseDate
       movieUrl
-      quizType
       createdAt
       updatedAt
     }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { UnorderedList, ListItem, Box, Grid, Button, Center, Select, Modal, ModalBody, ModalContent, ModalOverlay, ModalHeader, ModalFooter, ModalCloseButton, Heading, Link } from "@chakra-ui/react";
 import { StepType } from '../../types/GameStep'
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { Round } from "../../generated/graphql";
 
 /**
@@ -25,11 +25,6 @@ function GetStarted({ setStep, setLevel, level, onStarted, isLoading }: GetStart
             fontSize="2xl"
             m="10"
         >
-            <Toaster
-                position="top-center"
-                reverseOrder={false}
-            />
-
             <Box>
                 <Heading as="h2" fontSize="4xl" fontWeight="bold">
                     <Link color="blue.600" href="/">Ze quiz</Link>
