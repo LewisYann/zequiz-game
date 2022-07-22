@@ -20,7 +20,7 @@ services:
       - starter-net
     command: redis-server
     volumes:
-      - cache:/data
+      - ./cache:/data
 
   starter-web:
     build: ./web
