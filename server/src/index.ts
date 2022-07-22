@@ -11,7 +11,6 @@ import { createSchema } from "./utils/createSchema";
 import session from "express-session";
 import connectRedis from "connect-redis";
 import Redis from "ioredis";
-import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 
 
 dotenv.config({
@@ -43,7 +42,7 @@ const main = async () => {
   // creating 24 hours from milliseconds
   //app.use(cookieParser("restxf"))
   const RedisStore = connectRedis(session);
-  const redis = new Redis("127.0.0.1:6379");
+  const redis = new Redis(config.redis_url);
   app.set("trust proxy", 1);
 
 
@@ -69,7 +68,7 @@ const main = async () => {
         httpOnly: true,
         maxAge: oneDay,
       },
-      secret: "keydfboarddfcat",
+      secret: config.secret_key,
       saveUninitialized: false,
       resave: false
     })
@@ -82,14 +81,7 @@ const main = async () => {
       req,
       res,
       redis
-    }),
-    plugins: [
-      ApolloServerPluginLandingPageGraphQLPlayground({
-        settings: {
-          // "request.credentials":"include"
-        }
-      }),
-    ],
+    })
   });
 
   await apolloServer.start();
