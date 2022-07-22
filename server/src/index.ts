@@ -42,7 +42,7 @@ const main = async () => {
   // creating 24 hours from milliseconds
   //app.use(cookieParser("restxf"))
   const RedisStore = connectRedis(session);
-  const redis = new Redis(config.redis_url);
+  const redis = new Redis({ port: config.redis_port, host: config.redis_url });
   app.set("trust proxy", 1);
 
 
