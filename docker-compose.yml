@@ -12,7 +12,7 @@ services:
       - ./server/dbdata:/var/lib/postgresql/data
 
   redis-server:
-    image: redis:6.2-alpine
+    image: redis:latest
     restart: always
     ports:
       - '6379:6379'
@@ -52,6 +52,7 @@ services:
       - starter-net
     depends_on:
       - starter-db
+      - redis-server
     volumes:
       - ./server:/app
     command: /bin/sh "./entrypoint.sh"
