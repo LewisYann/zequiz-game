@@ -55,7 +55,10 @@ services:
       - redis-server
     volumes:
       - ./server:/app
+      - /app/node_modules
     command: /bin/sh "./entrypoint.sh"
 
 networks:
   starter-net:
+
+
